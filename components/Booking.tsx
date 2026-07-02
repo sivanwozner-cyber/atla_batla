@@ -5,11 +5,11 @@ import { Copy, Check, Mail } from "lucide-react";
 import { Reveal } from "@/components/Reveal";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import type { SiteContent } from "@/lib/content";
 
-// PRD §4.5 — מייל בולט, גדול, קליק-להעתקה. מייל placeholder (PRD §9).
-const EMAIL = "booking@atlabatla.com";
-
-export function Booking() {
+// PRD §4.5 — מייל בולט, גדול, קליק-להעתקה. התוכן מה-store (נערך ב-/admin/site).
+export function Booking({ booking }: { booking: SiteContent["booking"] }) {
+  const { email: EMAIL, blurb } = booking;
   const [copied, setCopied] = useState(false);
 
   async function copy() {
