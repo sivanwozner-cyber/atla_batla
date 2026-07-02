@@ -2,11 +2,11 @@ import Image from "next/image";
 import { Play } from "lucide-react";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import type { SiteContent } from "@/lib/content";
 
-// Hero (PRD §4.1) — wordmark ענק, טאגליין (placeholder), CTA "Listen" → #music.
-// רקע: איור AI נוצר ב-Gemini (§7, public/generated/hero.png) — לילה מדברי,
-// אוטובוסי מפלצת + מסקוט הגמל. מעליו scrim לקריאוּת + טוויקול כוכבים עדין (CSS).
-export function Hero() {
+// Hero (PRD §4.1) — wordmark ענק, טאגליין, CTA → #music. הטקסטים נטענים מה-store
+// (נערכים ב-/admin/site). רקע: איור AI מ-Gemini (§7, public/generated/hero.png).
+export function Hero({ hero }: { hero: SiteContent["hero"] }) {
   return (
     <section
       id="hero"
