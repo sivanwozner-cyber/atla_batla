@@ -1,0 +1,57 @@
+{
+  "hero": {
+    "eyebrow": "Negev · Suomisaundi · Goa · Funk",
+    "tagline": "From the blazing deserts to the global underground — pure Suomisoundi madness and deep psychedelic energy.",
+    "ctaLabel": "Listen",
+    "ctaHref": "#music"
+  },
+  "shows": [
+    {
+      "id": "back2mad-2026-09",
+      "date": "2026-09-12",
+      "venue": "Back2Mad — Time To SuomiSaundi",
+      "city": "Israel",
+      "setType": "Live"
+    }
+  ],
+  "music": {
+    "intro": "שני EPs ב-Bandcamp. שמות הטראקים נשמרים בדיוק כפי שהם — כולל שגיאות כתיב מכוונות.",
+    "eps": [
+      {
+        "id": "smoke-this-ep",
+        "title": "Smoke This EP",
+        "href": "https://randomrecords.bandcamp.com/album/smoke-this-ep",
+        "albumId": "2666857562",
+        "tracks": ["Tripi Tipi", "Bethoven's Virusss", "Smoke This"]
+      },
+      {
+        "id": "funk-them-all",
+        "title": "Funk Them All",
+        "href": "https://randomrecords.bandcamp.com/album/funk-them-all",
+        "albumId": "3936240832",
+        "tracks": ["Slappy Nights", "Angelic Camels", "Power Rangers (Tribute)", "Black Crows"]
+      }
+    ]
+  },
+  "about": {
+    "body": "From the blazing deserts to the global underground, Atla Batla delivers a wild blend of pure Suomisoundi madness and deep psychedelic energy — funky leads, driving basslines, and that unmistakable Finnish-inspired groove with a dusty desert twist.",
+    "creditPrefix": "Released on ",
+    "creditLabel": "Random Records",
+    "creditHref": "https://randomrecords.bandcamp.com",
+    "creditSuffix": " — a non-profit label supporting indigenous communities."
+  },
+  "booking": {
+    "email": "booking@atlabatla.com",
+    "blurb": "Promoters — get in touch. (מייל placeholder)"
+  },
+  "socials": [
+    { "id": "instagram", "label": "Instagram", "href": "https://www.instagram.com/atlabatla_suomi/" },
+    { "id": "facebook", "label": "Facebook", "href": "https://www.facebook.com/people/Atla-Batla-suomi/61578955019841/" },
+    { "id": "bandcamp", "label": "Bandcamp", "href": "https://atlabatla.bandcamp.com" },
+    { "id": "soundcloud", "label": "SoundCloud", "href": "https://soundcloud.com/atla-batla" }
+  ],
+  "site": {
+    "title": "Atla Batla",
+    "description": "Atla Batla — from the blazing deserts of the Negev to the global underground. (placeholder)"
+  }
+}
