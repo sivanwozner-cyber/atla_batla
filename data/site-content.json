@@ -22,14 +22,23 @@
         "title": "Smoke This EP",
         "href": "https://randomrecords.bandcamp.com/album/smoke-this-ep",
         "albumId": "2666857562",
-        "tracks": ["Tripi Tipi", "Bethoven's Virusss", "Smoke This"]
+        "tracks": [
+          "Tripi Tipi",
+          "Bethoven's Virusss",
+          "Smoke This"
+        ]
       },
       {
         "id": "funk-them-all",
         "title": "Funk Them All",
         "href": "https://randomrecords.bandcamp.com/album/funk-them-all",
         "albumId": "3936240832",
-        "tracks": ["Slappy Nights", "Angelic Camels", "Power Rangers (Tribute)", "Black Crows"]
+        "tracks": [
+          "Slappy Nights",
+          "Angelic Camels",
+          "Power Rangers (Tribute)",
+          "Black Crows"
+        ]
       }
     ]
   },
@@ -45,10 +54,26 @@
     "blurb": "Promoters — get in touch. (מייל placeholder)"
   },
   "socials": [
-    { "id": "instagram", "label": "Instagram", "href": "https://www.instagram.com/atlabatla_suomi/" },
-    { "id": "facebook", "label": "Facebook", "href": "https://www.facebook.com/people/Atla-Batla-suomi/61578955019841/" },
-    { "id": "bandcamp", "label": "Bandcamp", "href": "https://atlabatla.bandcamp.com" },
-    { "id": "soundcloud", "label": "SoundCloud", "href": "https://soundcloud.com/atla-batla" }
+    {
+      "id": "instagram",
+      "label": "Instagram",
+      "href": "https://www.instagram.com/atlabatla_suomi/"
+    },
+    {
+      "id": "facebook",
+      "label": "Facebook",
+      "href": "https://www.facebook.com/people/Atla-Batla-suomi/61578955019841/"
+    },
+    {
+      "id": "bandcamp",
+      "label": "Bandcamp",
+      "href": "https://atlabatla.bandcamp.com"
+    },
+    {
+      "id": "soundcloud",
+      "label": "SoundCloud",
+      "href": "https://soundcloud.com/atla-batla"
+    }
   ],
   "site": {
     "title": "Atla Batla",
