@@ -40,6 +40,7 @@ export function MovingObjects() {
         const isMover = !!o.dur;
         const wrapCls = `${isMover ? moving : "mo-mush"} mo-${o.glow}`;
         const img = (
+          // eslint-disable-next-line @next/next/no-img-element -- sprite דקורטיבי, לא צריך אופטימיזציית next/image
           <img
             className="mo-img"
             src={o.src}
