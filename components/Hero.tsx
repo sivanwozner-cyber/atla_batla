@@ -37,7 +37,7 @@ export function Hero({ hero }: { hero: SiteContent["hero"] }) {
 
       <div className="relative z-10 flex flex-col items-center">
         <p className="mb-4 text-xs font-bold uppercase tracking-[0.3em] text-cyan drop-shadow-[0_1px_6px_rgba(11,4,32,0.9)]">
-          Negev · Suomisaundi · Goa · Funk
+          {hero.eyebrow}
         </p>
         <h1 className="mt-1 flex justify-center">
           <Image
