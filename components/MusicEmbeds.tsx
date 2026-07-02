@@ -1,38 +1,20 @@
 import { Reveal } from "@/components/Reveal";
 import { FaBandcamp } from "react-icons/fa6";
+import type { SiteContent } from "@/lib/content";
 
-// PRD §4.3 — שני EPs ב-Bandcamp (Random Records). קודי ה-embed וה-tracklists
-// אמיתיים, נמשכו מ-randomrecords.bandcamp.com. שמות הטראקים נשמרים בדיוק כפי
-// שהם, כולל שגיאות כתיב מכוונות ("Bethoven's Virusss") — אסור "לתקן".
-const EPS = [
-  {
-    title: "Smoke This EP",
-    href: "https://randomrecords.bandcamp.com/album/smoke-this-ep",
-    albumId: "2666857562",
-    tracks: ["Tripi Tipi", "Bethoven's Virusss", "Smoke This"],
-  },
-  {
-    title: "Funk Them All",
-    href: "https://randomrecords.bandcamp.com/album/funk-them-all",
-    albumId: "3936240832",
-    tracks: ["Slappy Nights", "Angelic Camels", "Power Rangers (Tribute)", "Black Crows"],
-  },
-];
-
-export function MusicEmbeds() {
+// PRD §4.3 — EPs ב-Bandcamp (Random Records). התוכן נטען מה-store (נערך ב-/admin/music).
+// שמות הטראקים נשמרים בדיוק כפי שהם, כולל שגיאות כתיב מכוונות — אסור "לתקן".
+export function MusicEmbeds({ music }: { music: SiteContent["music"] }) {
   return (
     <section id="music" className="scroll-mt-14 px-6 py-20">
       <div className="mx-auto max-w-4xl">
         <Reveal>
           <h2 className="wordmark text-4xl sm:text-5xl">Music</h2>
-          <p className="mt-3 max-w-xl text-cream/70">
-            שני EPs ב-Bandcamp. שמות הטראקים נשמרים בדיוק כפי שהם — כולל שגיאות
-            כתיב מכוונות.
-          </p>
+          <p className="mt-3 max-w-xl text-cream/70">{music.intro}</p>
         </Reveal>
 
         <div className="mt-8 grid gap-6 sm:grid-cols-2">
-          {EPS.map((ep, i) => (
+          {music.eps.map((ep, i) => (
             <Reveal key={ep.title} delay={i * 0.08}>
               <div className="rounded-2xl border border-white/10 bg-card p-4">
                 <iframe
