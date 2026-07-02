@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 // scripts/cutout.mjs — הפיכת רקע שחור אחיד לשקוף עבור ארטוורק מ-Gemini.
 // Gemini מזייף שקיפות (ראה memory), אז מייצרים את האובייקט על רקע שחור מלא
-// ואז מסירים כאן את השחור ל-alpha אמיתי. משתמשים ב-flood-fill מהשוליים כדי
-// שרק השחור המחובר לרקע יוסר — קווי המתאר השחורים *בתוך* האובייקט נשמרים.
+// ואז מסירים כאן את השחור ל-alpha אמיתי. flood-fill מהשוליים מסיר רק את השחור
+// המחובר לרקע — קווי המתאר השחורים *בתוך* האובייקט נשמרים (הם מוקפים בצבע).
 //
 // שימוש: node scripts/cutout.mjs <in.png> <out.png> [threshold=64] [feather=1.2]
 import sharp from "sharp";
@@ -24,7 +24,7 @@ const { data, info } = await sharp(inPath)
 const { width: W, height: H, channels: C } = info;
 
 const bright = (i) => Math.max(data[i], data[i + 1], data[i + 2]);
-const cleared = new Uint8Array(W * H); // 1 = הפך שקוף (רקע)
+const cleared = new Uint8Array(W * H); // 1 = רקע (יהפוך שקוף)
 const stack = [];
 const visit = (x, y) => {
   if (x < 0 || y < 0 || x >= W || y >= H) return;
@@ -51,7 +51,7 @@ while (stack.length) {
   visit(x, y - 1);
 }
 
-// בונים ערוץ אלפא, מטשטשים אותו מעט (feather), ומחזירים למקורי
+// אלפא: 0 לרקע, 255 לאובייקט; טשטוש קל ל-feather
 const a = Buffer.alloc(W * H);
 for (let p = 0; p < W * H; p++) a[p] = cleared[p] ? 0 : 255;
 const alpha =
@@ -63,8 +63,30 @@ const alpha =
     : a;
 for (let p = 0; p < W * H; p++) data[p * C + 3] = alpha[p];
 
+// bounding-box של הפיקסלים האטומים + padding, וחיתוך ידני (sharp.trim לא אמין כאן)
+let minx = W, miny = H, maxx = -1, maxy = -1;
+for (let y = 0; y < H; y++) {
+  for (let x = 0; x < W; x++) {
+    if (alpha[y * W + x] > 8) {
+      if (x < minx) minx = x;
+      if (x > maxx) maxx = x;
+      if (y < miny) miny = y;
+      if (y > maxy) maxy = y;
+    }
+  }
+}
+if (maxx < 0) {
+  console.error("cutout: nothing left (threshold too high?)");
+  process.exit(1);
+}
+const PAD = 8;
+minx = Math.max(0, minx - PAD);
+miny = Math.max(0, miny - PAD);
+maxx = Math.min(W - 1, maxx + PAD);
+maxy = Math.min(H - 1, maxy + PAD);
+
 await sharp(data, { raw: { width: W, height: H, channels: C } })
+  .extract({ left: minx, top: miny, width: maxx - minx + 1, height: maxy - miny + 1 })
   .png()
-  .trim({ threshold: 1 }) // חיתוך שוליים שקופים כדי ש-sprite יהיה צמוד
   .toFile(outPath);
-console.log(`✓ cutout → ${outPath}`);
+console.log(`✓ cutout → ${outPath} (${maxx - minx + 1}x${maxy - miny + 1})`);
