@@ -66,3 +66,9 @@
 - **Decisions:** מודל `gemini-3.1-flash-image` (ברירת המחדל מ-PRD) — **עבד בהרצה ראשונה**, לא נדרש fallback. הוסרו שכבות ה-CSS הסטטיות (`starfield`,`hero-horizon`) שהתייתרו; טוויקול נשמר לכיבוד PRD §5. הזנת פליירים אמיתיים כרפרנס (PRD §7) לשמירת עקביות (אותו גמל/אוטובוס/טון).
 - **Notes / Caveats:** האיור כולל SynthID watermark שקוף. screenshot של Preview עדיין תקול בסביבה (אומת דרך eval). שגיאות hydration של `Reveal` צצו ב-console — קיימות מ-Phase 3, לא קשורות לשינוי, טרם תוקנו. `.starfield`/`.hero-horizon` ב-globals.css כעת ללא שימוש (לא הוסרו).
 - **Related:** [[gemini-art-script]], [[landing-page-components]], [[prd-document]]
+
+### 2026-07-02 — רה-ג'ינרוט ארטוורק ה-Hero [shipped]
+- **What was done:** לבקשת המשתמשת ("להריץ generate:art ולחבר ארטוורק Hero אמיתי") הורץ מחדש ה-pipeline. נוצר hero חדש (flash `gemini-3.1-flash-image`, 16:9, 2K, אותם 5 רפרנסים 82040/81697/11070/11251/11254) עם prompt שאוסר טקסט מפורשות; נכתב תחילה ל-`hero-2.png` ואז הוחלף פנימה כ-`public/generated/hero.png` (הקודם → `hero-prev.png`). `Hero.tsx` ללא שינוי (כבר מצביע ל-`/generated/hero.png`). אומת דרך dev server + curl: `/`=200, `/_next/image` של ה-hero=200 (image/jpeg), הסטטי `/generated/hero.png`=200 (3,125,867B).
+- **Decisions:** קובץ חדש קודם ואז swap — כדי לא להרוס את הארטוורק הטוב הקיים (`public/generated/` gitignored, אין גיבוי git). prompt נקי-מטקסט לתיקון הכיתוב המשובש "ATLA BATLA" שהמודל צייר על האוטובוס ב-hero הקודם. נשאר flash (מוכח), לא pro.
+- **Notes / Caveats:** הפלט החדש נקי מטקסט לגמרי + שמיים פנויים במרכז-עליון ל-wordmark (אומת ב-view). screenshot של Preview עדיין לא אמין — אומת דרך curl. `.env.local` מכיל 2 שורות `GEMINI_API_KEY`; השנייה (`AQ.Ab8…`, OAuth-style) גוברת (last-wins) ו**עובדת**. `hero-prev.png` שמור לריוורט (gitignored).
+- **Related:** [[gemini-art-script]], [[landing-page-components]], [[prd-document]]
