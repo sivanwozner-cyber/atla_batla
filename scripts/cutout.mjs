@@ -15,7 +15,9 @@ if (!inPath || !outPath) {
   process.exit(1);
 }
 const THRESH = Number(thrArg ?? 64); // סף בהירות שמתחתיו פיקסל נחשב "רקע שחור"
-const FEATHER = Number(featherArg ?? 1.2); // טשטוש קל לאלפא לקצוות רכים
+// feather=0 כברירת מחדל: הקצוות כבר נקיים מול השחור, וההקטנה ל-sprite קטן באתר
+// נותנת anti-alias טבעי. (טשטוש-אלפא ידני על buffer גולמי הכניס פסים — נמנע.)
+const FEATHER = Number(featherArg ?? 0);
 
 const { data, info } = await sharp(inPath)
   .ensureAlpha()
