@@ -281,6 +281,44 @@
   }
 }
 
+/* Aurora Drift — ריחוף + "נשימה" איטיים של הבועות, וריצוד עדין של הכוכבים */
+@keyframes aurora-drift-1 {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(12%, 8%, 0) scale(1.25);
+  }
+}
+@keyframes aurora-drift-2 {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1.1);
+  }
+  50% {
+    transform: translate3d(-14%, 10%, 0) scale(1.3);
+  }
+}
+@keyframes aurora-drift-3 {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1.15);
+  }
+  50% {
+    transform: translate3d(10%, -8%, 0) scale(0.9);
+  }
+}
+@keyframes aurora-twinkle {
+  0%,
+  100% {
+    opacity: 0.22;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
 html {
   scroll-behavior: smooth;
 }
@@ -292,5 +330,10 @@ html {
   .starfield-twinkle {
     animation: none;
     opacity: 0.5;
+  }
+  /* הרקע נשאר — אבל קפוא (בלי ריחוף/ריצוד) */
+  .aurora-stars,
+  .aurora-blob {
+    animation: none;
   }
 }
