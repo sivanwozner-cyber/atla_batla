@@ -1,0 +1,215 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+/* ──────────────────────────────────────────────────────────────
+   Atla Batla — design tokens (Phase 2)
+   נגזר מצפייה ב-15 תמונות ב-/examples. מאשר את הפלטה הזמנית של PRD §5
+   ומוסיף: --violet (שמי פסיכדליה), --sunset (אופק מדבר), --cream (דיו).
+   האתר dark-first: בסיס לילה כהה, דיו קרם, אקצנטים ניאון.
+   ────────────────────────────────────────────────────────────── */
+
+@theme inline {
+  /* shadcn semantic tokens */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  /* Atla Batla brand palette — Tailwind utilities: bg-night, text-gold, … */
+  --color-night: var(--night);
+  --color-night-2: var(--night-2);
+  --color-dune: var(--dune);
+  --color-sand: var(--sand);
+  --color-gold: var(--gold);
+  --color-ember: var(--ember);
+  --color-sunset: var(--sunset);
+  --color-magenta: var(--magenta);
+  --color-violet: var(--violet);
+  --color-cyan: var(--cyan);
+  --color-lime: var(--lime);
+  --color-cream: var(--cream);
+
+  /* fonts */
+  --font-sans: var(--font-sans);
+  --font-display: var(--font-display);
+  --font-mono: var(--font-geist-mono);
+  --font-heading: var(--font-display);
+
+  /* radii */
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+}
+
+:root {
+  /* brand palette */
+  --night: #0b0420;
+  --night-2: #1b0b3d;
+  --dune: #5c2e0a;
+  --sand: #c4843a;
+  --gold: #ffe44a;
+  --ember: #ff9500;
+  --sunset: #ff5a1f;
+  --magenta: #ff44aa;
+  --violet: #7a2bd6;
+  --cyan: #44eeff;
+  --lime: #44ff88;
+  --cream: #fdf6e3;
+
+  /* shadcn semantic — מופה לפלטת הלילה */
+  --background: var(--night);
+  --foreground: var(--cream);
+  --card: var(--night-2);
+  --card-foreground: var(--cream);
+  --popover: var(--night-2);
+  --popover-foreground: var(--cream);
+  --primary: var(--gold);
+  --primary-foreground: #1a0b05;
+  --secondary: var(--violet);
+  --secondary-foreground: var(--cream);
+  --muted: #2a1550;
+  --muted-foreground: #c9b8e8;
+  --accent: var(--magenta);
+  --accent-foreground: var(--cream);
+  --destructive: #ff4444;
+  --border: rgba(255, 255, 255, 0.12);
+  --input: rgba(255, 255, 255, 0.15);
+  --ring: var(--magenta);
+  --radius: 0.75rem;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+    /* זוהר שקיעת מדבר עדין בתחתית + לילה למעלה */
+    background-image:
+      radial-gradient(120% 80% at 50% 120%, rgba(255, 89, 31, 0.18), transparent 55%),
+      radial-gradient(90% 60% at 80% -10%, rgba(122, 43, 214, 0.22), transparent 60%);
+    background-attachment: fixed;
+  }
+  html {
+    @apply font-sans;
+  }
+}
+
+@layer components {
+  /* ה-wordmark: אותיות בועה (Titan One) + מילוי גרדיאנט rainbow + קו מתאר כהה.
+     משחזר את מראה הפליירים האמיתיים. שימוש: <span class="wordmark">ATLA BATLA</span> */
+  .wordmark {
+    font-family: var(--font-display), system-ui, sans-serif;
+    font-weight: 400;
+    /* נטייה קלה (italic מסונתז) לתחושת ה-shape של Power Rangers; ריווח מהודק
+       כי Bungee רחב מטבעו. הצבעים (גרדיאנט + stroke) ללא שינוי. */
+    font-style: italic;
+    letter-spacing: -0.01em;
+    line-height: 0.95;
+    background: linear-gradient(
+      180deg,
+      var(--gold) 0%,
+      var(--ember) 38%,
+      var(--magenta) 70%,
+      var(--violet) 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    -webkit-text-stroke: 0.05em rgba(11, 4, 32, 0.9);
+    paint-order: stroke fill;
+    filter: drop-shadow(0 0.04em 0 rgba(11, 4, 32, 0.6));
+  }
+
+  .font-display {
+    font-family: var(--font-display), system-ui, sans-serif;
+  }
+
+  /* Hero starfield (CSS, לא WebGL — שומר ביצועים במובייל, PRD §5) + זוהר אופק */
+  .starfield,
+  .starfield-twinkle,
+  .hero-horizon {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+  .starfield {
+    background-image:
+      radial-gradient(1.5px 1.5px at 15% 20%, #fff, transparent),
+      radial-gradient(1.5px 1.5px at 80% 15%, #fff, transparent),
+      radial-gradient(1px 1px at 40% 35%, rgba(255, 255, 255, 0.8), transparent),
+      radial-gradient(1px 1px at 65% 45%, rgba(255, 255, 255, 0.7), transparent),
+      radial-gradient(1.5px 1.5px at 25% 62%, #fff, transparent),
+      radial-gradient(1px 1px at 90% 55%, rgba(255, 255, 255, 0.8), transparent),
+      radial-gradient(1px 1px at 55% 12%, rgba(255, 255, 255, 0.7), transparent),
+      radial-gradient(1.5px 1.5px at 10% 48%, rgba(255, 255, 255, 0.9), transparent);
+    opacity: 0.8;
+  }
+  .starfield-twinkle {
+    background-image:
+      radial-gradient(1.5px 1.5px at 30% 25%, #cfe9ff, transparent),
+      radial-gradient(1.5px 1.5px at 75% 30%, #ffe4fb, transparent),
+      radial-gradient(1px 1px at 50% 58%, #fff, transparent),
+      radial-gradient(1.5px 1.5px at 85% 66%, #d5fff0, transparent),
+      radial-gradient(1px 1px at 18% 72%, #fff, transparent);
+    animation: twinkle 3.6s ease-in-out infinite;
+  }
+  .hero-horizon {
+    top: auto;
+    height: 45%;
+    background-image: linear-gradient(
+      to top,
+      rgba(255, 90, 31, 0.35),
+      rgba(255, 68, 170, 0.12) 45%,
+      transparent
+    );
+  }
+  .glow-featured {
+    box-shadow:
+      0 0 0 1px var(--gold),
+      0 0 26px -6px var(--gold);
+  }
+}
+
+@keyframes twinkle {
+  0%,
+  100% {
+    opacity: 0.25;
+  }
+  50% {
+    opacity: 0.9;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .starfield-twinkle {
+    animation: none;
+    opacity: 0.5;
+  }
+}

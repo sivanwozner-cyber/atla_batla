@@ -1,0 +1,103 @@
+"use client";
+
+import { useState } from "react";
+import Image from "next/image";
+import { Menu } from "lucide-react";
+import {
+  Sheet,
+  SheetContent,
+  SheetTrigger,
+  SheetTitle,
+} from "@/components/ui/sheet";
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+
+const NAV = [
+  { href: "#shows", label: "Shows" },
+  { href: "#music", label: "Music" },
+  { href: "#about", label: "About" },
+  { href: "#booking", label: "Booking" },
+];
+
+// הדר sticky (PRD §4) — wordmark משמאל, ניווט עוגנים מימין,
+// ובמובייל תפריט Sheet (shadcn/Base UI).
+export function SiteHeader() {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <header
+      id="top"
+      className="sticky top-0 z-50 border-b border-white/10 bg-night/70 backdrop-blur-md"
+    >
+      <div className="mx-auto flex h-14 max-w-5xl items-center justify-between px-4">
+        <a
+          href="#top"
+          aria-label="Atla Batla — back to top"
+          className="flex items-center"
+        >
+          <Image
+            src="/generated/wordmark.png"
+            alt="Atla Batla"
+            width={2638}
+            height={846}
+            sizes="120px"
+            className="h-7 w-auto"
+          />
+        </a>
+
+        <nav className="hidden items-center gap-6 sm:flex">
+          {NAV.map((n) => (
+            <a
+              key={n.href}
+              href={n.href}
+              className="text-sm font-bold uppercase tracking-wide text-cream/80 transition-colors hover:text-gold"
+            >
+              {n.label}
+            </a>
+          ))}
+        </nav>
+
+        <div className="sm:hidden">
+          <Sheet open={open} onOpenChange={setOpen}>
+            <SheetTrigger
+              aria-label="Open menu"
+              className={cn(
+                buttonVariants({ variant: "ghost", size: "icon" }),
+                "text-cream"
+              )}
+            >
+              <Menu />
+            </SheetTrigger>
+            <SheetContent
+              side="right"
+              className="border-white/10 bg-night text-cream"
+            >
+              <SheetTitle className="px-4 pt-5">
+                <Image
+                  src="/generated/wordmark.png"
+                  alt="Atla Batla"
+                  width={2638}
+                  height={846}
+                  sizes="120px"
+                  className="h-6 w-auto"
+                />
+              </SheetTitle>
+              <nav className="mt-4 flex flex-col gap-1 px-2">
+                {NAV.map((n) => (
+                  <a
+                    key={n.href}
+                    href={n.href}
+                    onClick={() => setOpen(false)}
+                    className="rounded-lg px-4 py-3 text-lg font-bold uppercase tracking-wide text-cream/90 transition-colors hover:bg-white/5 hover:text-gold"
+                  >
+                    {n.label}
+                  </a>
+                ))}
+              </nav>
+            </SheetContent>
+          </Sheet>
+        </div>
+      </div>
+    </header>
+  );
+}
