@@ -34,7 +34,8 @@ export function SiteFooter({ socials }: { socials: SiteContent["socials"] }) {
             >
               <Icon className="size-5" />
             </a>
-          ))}
+            );
+          })}
         </div>
         <p className="text-center text-xs text-cream/40">
           © {new Date().getFullYear()} Atla Batla · Negev underground · Random
