@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Rubik, Bungee, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { AuroraBackground } from "@/components/AuroraBackground";
+import { getContent } from "@/lib/content";
 
 // Rubik — פונט ה-UI הראשי (PRD §5): תמיכת עברית מצוינת, אופי עגול-משחקי.
 // variable: "--font-sans" כדי שיזרום אל token ה-font-sans של shadcn ב-globals.css.
@@ -27,11 +28,14 @@ const geistMono = Geist_Mono({
   display: "swap",
 });
 
-export const metadata: Metadata = {
-  title: "Atla Batla",
-  description:
-    "Atla Batla — from the blazing deserts of the Negev to the global underground. (placeholder)",
-};
+// כותרת/תיאור נטענים מה-store (נערכים ב-/admin/site). עמודי האדמין דורסים מקומית.
+export async function generateMetadata(): Promise<Metadata> {
+  const { site } = await getContent();
+  return {
+    title: site.title,
+    description: site.description,
+  };
+}
 
 export default function RootLayout({
   children,

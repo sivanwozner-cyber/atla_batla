@@ -2,7 +2,8 @@
 
 import { useActionState } from "react";
 import { LogIn, Loader2 } from "lucide-react";
-import { loginAction, type LoginState } from "@/app/admin/actions";
+import { loginAction } from "@/app/admin/actions";
+import type { LoginState } from "@/app/admin/form-state";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { Field } from "@/app/admin/_components/ui";

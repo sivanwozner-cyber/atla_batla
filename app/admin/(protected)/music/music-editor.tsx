@@ -2,8 +2,9 @@
 
 import { useActionState, useState } from "react";
 import { Plus, Trash2 } from "lucide-react";
-import { saveMusicAction, type SaveState } from "@/app/admin/actions";
-import type { EP } from "@/lib/content";
+import { saveMusicAction } from "@/app/admin/actions";
+import type { SaveState } from "@/app/admin/form-state";
+import type { EP } from "@/lib/content-types";
 import {
   inputClass,
   labelClass,

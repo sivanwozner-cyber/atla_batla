@@ -8,14 +8,14 @@ import {
   saveBookingAction,
   saveSocialsAction,
   saveSiteAction,
-  type SaveState,
 } from "@/app/admin/actions";
+import type { SaveState } from "@/app/admin/form-state";
 import {
   SOCIAL_LABELS,
   type SiteContent,
   type SocialLabel,
   type SocialLink,
-} from "@/lib/content";
+} from "@/lib/content-types";
 import {
   Field,
   TextArea,

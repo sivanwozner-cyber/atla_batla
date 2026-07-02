@@ -27,7 +27,7 @@ export function proxy(request: NextRequest) {
   return NextResponse.next();
 }
 
-// רץ רק על נתיבי /admin — עמוד הנחיתה הציבורי לא מושפע.
+// רץ רק על /admin ותת-הנתיבים שלו — עמוד הנחיתה הציבורי לא מושפע.
 export const config = {
-  matcher: ["/admin/:path*"],
+  matcher: ["/admin", "/admin/:path*"],
 };

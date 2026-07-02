@@ -3,6 +3,7 @@
 import { getContent } from "@/lib/content";
 import { SiteHeader } from "@/components/SiteHeader";
 import { Hero } from "@/components/Hero";
+import { MovingObjects } from "@/components/MovingObjects";
 import { UpcomingShows } from "@/components/UpcomingShows";
 import { MusicEmbeds } from "@/components/MusicEmbeds";
 import { About } from "@/components/About";
@@ -17,10 +18,15 @@ export default async function Home() {
       <SiteHeader />
       <main className="flex-1">
         <Hero hero={content.hero} />
-        <UpcomingShows shows={content.shows} />
-        <MusicEmbeds music={content.music} />
-        <About about={content.about} />
-        <Booking booking={content.booking} />
+        {/* אמצע+תחתית: wrapper עם isolation ליצירת stacking-context מקומי, כך
+            ש-MovingObjects (‎-z-10) יושב מאחורי הסקשנים אך לא מאחורי ה-Hero. */}
+        <div className="relative isolate">
+          <MovingObjects />
+          <UpcomingShows shows={content.shows} />
+          <MusicEmbeds music={content.music} />
+          <About about={content.about} />
+          <Booking booking={content.booking} />
+        </div>
       </main>
       <SiteFooter socials={content.socials} />
     </>

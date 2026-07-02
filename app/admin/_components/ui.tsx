@@ -7,7 +7,7 @@ import { useFormStatus } from "react-dom";
 import { Check, Loader2, Save } from "lucide-react";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import type { SaveState } from "@/app/admin/actions";
+import type { SaveState } from "@/app/admin/form-state";
 
 export const inputClass =
   "w-full rounded-lg border border-white/15 bg-night/50 px-3 py-2 text-sm text-cream outline-none transition-colors placeholder:text-cream/30 focus:border-gold/60 focus:ring-2 focus:ring-gold/20";

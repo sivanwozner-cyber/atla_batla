@@ -2,8 +2,9 @@
 
 import { useActionState, useState } from "react";
 import { Plus, Trash2 } from "lucide-react";
-import { saveShowsAction, type SaveState } from "@/app/admin/actions";
-import { SET_TYPES, type ShowEvent, type SetType } from "@/lib/content";
+import { saveShowsAction } from "@/app/admin/actions";
+import type { SaveState } from "@/app/admin/form-state";
+import { SET_TYPES, type ShowEvent, type SetType } from "@/lib/content-types";
 import {
   inputClass,
   labelClass,

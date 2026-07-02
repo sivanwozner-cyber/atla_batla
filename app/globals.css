@@ -337,3 +337,140 @@ html {
     animation: none;
   }
 }
+
+/* ──────────────────────────────────────────────────────────────
+   Moving Objects — אובייקטים מצוירים (SVG) שנעים על הרקע. שכבה absolute
+   מאחורי התוכן, ממוקמת ב-page.tsx בתוך wrapper אחרי ה-Hero (אמצע+תחתית בלבד).
+   כל האנימציה CSS, מכבד prefers-reduced-motion. שימוש: <MovingObjects />. */
+.mo-layer {
+  position: absolute;
+  inset: 0;
+  z-index: -10;
+  overflow: hidden;
+  pointer-events: none;
+}
+.mo-stars {
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(1.5px 1.5px at 12% 8%, #fff, transparent),
+    radial-gradient(1px 1px at 28% 18%, rgba(255, 255, 255, 0.8), transparent),
+    radial-gradient(1.5px 1.5px at 52% 6%, #fff, transparent),
+    radial-gradient(1px 1px at 74% 14%, rgba(255, 255, 255, 0.75), transparent),
+    radial-gradient(1.5px 1.5px at 88% 9%, #fff, transparent),
+    radial-gradient(1px 1px at 40% 22%, rgba(255, 255, 255, 0.7), transparent);
+  background-size: 100% 340px;
+  background-repeat: repeat;
+  opacity: 0.4;
+  animation: mo-tw 5s ease-in-out infinite;
+}
+.mo-cross,
+.mo-crossR {
+  position: absolute;
+  left: 0;
+  will-change: transform;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+.mo-cross {
+  animation-name: mo-cross;
+}
+.mo-crossR {
+  animation-name: mo-crossR;
+}
+.mo-bob {
+  animation: mo-bob 3.4s ease-in-out infinite;
+}
+.mo-ufo {
+  filter: drop-shadow(0 0 7px rgba(68, 238, 255, 0.55));
+}
+.mo-bus {
+  filter: drop-shadow(0 0 9px rgba(255, 68, 170, 0.4));
+}
+.mo-mush {
+  position: absolute;
+  filter: drop-shadow(0 0 7px rgba(255, 68, 170, 0.5));
+  animation: mo-bob 3.8s ease-in-out infinite;
+}
+.mo-shoot {
+  position: absolute;
+  width: 90px;
+  height: 2px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, transparent, #cfe9ff);
+  opacity: 0;
+  animation: mo-shoot 10s ease-in infinite;
+}
+.mo-beam {
+  animation: mo-beam 2.4s ease-in-out infinite;
+}
+@keyframes mo-cross {
+  from {
+    transform: translateX(-140px);
+  }
+  to {
+    transform: translateX(110vw);
+  }
+}
+@keyframes mo-crossR {
+  from {
+    transform: translateX(110vw);
+  }
+  to {
+    transform: translateX(-180px);
+  }
+}
+@keyframes mo-bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-11px);
+  }
+}
+@keyframes mo-tw {
+  0%,
+  100% {
+    opacity: 0.28;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+@keyframes mo-beam {
+  0%,
+  100% {
+    opacity: 0.35;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+@keyframes mo-shoot {
+  0% {
+    opacity: 0;
+    transform: translate(0, 0) rotate(22deg);
+  }
+  4% {
+    opacity: 0.9;
+  }
+  15% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(340px, 150px) rotate(22deg);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .mo-cross,
+  .mo-crossR,
+  .mo-bob,
+  .mo-mush,
+  .mo-stars,
+  .mo-shoot,
+  .mo-beam {
+    animation: none;
+  }
+}

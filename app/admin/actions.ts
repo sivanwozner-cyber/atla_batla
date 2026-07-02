@@ -9,6 +9,7 @@ import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import { checkCredentials } from "@/lib/auth";
 import { createSession, destroySession, requireSession } from "@/lib/session";
+import type { LoginState, SaveState } from "@/app/admin/form-state";
 import {
   getContent,
   saveContent,
@@ -20,9 +21,6 @@ import {
   type SocialLabel,
   type SocialLink,
 } from "@/lib/content";
-
-export type LoginState = { error?: string } | undefined;
-export type SaveState = { ok?: boolean; error?: string; savedAt?: number };
 
 // ── עזרי קלט ─────────────────────────────────────────────────────────────
 function str(formData: FormData, key: string): string {

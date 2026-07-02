@@ -1,73 +1,13 @@
 // lib/content.ts — מקור-האמת היחיד לתוכן האתר (CMS קליל מבוסס-JSON).
 // נקרא ע"י עמוד הנחיתה (Server Components) ונכתב ע"י פאנל הניהול (/admin).
-// שרת בלבד — אין לייבא את הקובץ הזה מרכיב "use client" (הוא משתמש ב-node:fs).
+// שרת בלבד — אין לייבא את הקובץ הזה מרכיב "use client" (הוא משתמש ב-node:fs);
+// רכיבי client מייבאים טיפוסים וקבועים מ-lib/content-types.ts.
 
 import { promises as fs } from "node:fs";
 import path from "node:path";
+import type { SiteContent } from "@/lib/content-types";
 
-export type SetType = "Live" | "DJ Set" | "Hybrid";
-export const SET_TYPES: SetType[] = ["Live", "DJ Set", "Hybrid"];
-
-export interface ShowEvent {
-  id: string;
-  date: string; // "YYYY-MM-DD"
-  venue: string;
-  city: string;
-  ticketUrl?: string;
-  setType: SetType;
-}
-
-export interface EP {
-  id: string;
-  title: string;
-  href: string;
-  albumId: string;
-  tracks: string[];
-}
-
-export type SocialLabel = "Instagram" | "Facebook" | "Bandcamp" | "SoundCloud";
-export const SOCIAL_LABELS: SocialLabel[] = [
-  "Instagram",
-  "Facebook",
-  "Bandcamp",
-  "SoundCloud",
-];
-
-export interface SocialLink {
-  id: string;
-  label: SocialLabel;
-  href: string;
-}
-
-export interface SiteContent {
-  hero: {
-    eyebrow: string;
-    tagline: string;
-    ctaLabel: string;
-    ctaHref: string;
-  };
-  shows: ShowEvent[];
-  music: {
-    intro: string;
-    eps: EP[];
-  };
-  about: {
-    body: string;
-    creditPrefix: string;
-    creditLabel: string;
-    creditHref: string;
-    creditSuffix: string;
-  };
-  booking: {
-    email: string;
-    blurb: string;
-  };
-  socials: SocialLink[];
-  site: {
-    title: string;
-    description: string;
-  };
-}
+export * from "@/lib/content-types";
 
 // ברירת מחדל — משמשת גם כ-fallback אם קובץ ה-JSON חסר/פגום, וגם למיזוג שדות
 // חסרים כשמוסיפים שדה חדש למודל. משוכפל מהערכים שהיו hard-coded ברכיבים.
@@ -181,12 +121,4 @@ export async function getContent(): Promise<SiteContent> {
 export async function saveContent(content: SiteContent): Promise<void> {
   const json = JSON.stringify(content, null, 2);
   await fs.writeFile(DATA_PATH, json + "\n", "utf8");
-}
-
-/** סינון להופעות עתידיות בלבד, ממוינות עולה (date >= today). כמו ב-PRD §6. */
-export function upcomingShows(list: ShowEvent[]): ShowEvent[] {
-  const today = new Date().toISOString().slice(0, 10);
-  return [...list]
-    .filter((e) => e.date >= today)
-    .sort((a, b) => a.date.localeCompare(b.date));
 }
