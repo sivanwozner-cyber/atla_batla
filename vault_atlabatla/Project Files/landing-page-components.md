@@ -17,7 +17,7 @@
 
 ## Open Questions
 - כל הטקסט/קישורים placeholder — ממתין לתוכן אמיתי (PRD §9): מייל בוקינג, embeds, רשתות, ביו, תאריכי הופעות.
-- רקע ה-Hero — **הוחלף בארטוורק Gemini אמיתי** (Phase 5, `hero.png`). לוגו ה-wordmark הוחלף בתמונה (Phase 6, `wordmark.png`). `.starfield`/`.hero-horizon`/`.wordmark` ב-globals.css כעת ללא שימוש (לא הוסרו — fallback אפשרי).
+- רקע ה-Hero — **הוחלף בארטוורק Gemini אמיתי** (Phase 5; **רה-ג'ונרט 2026-07-02** עם prompt נקי-מטקסט → `hero.png` חדש, הקודם שמור כ-`hero-prev.png` לריוורט). לוגו ה-wordmark הוחלף בתמונה (Phase 6, `wordmark.png`). `.starfield`/`.hero-horizon`/`.wordmark` ב-globals.css כעת ללא שימוש (לא הוסרו — fallback אפשרי).
 - `Reveal` גורם ל-hydration mismatch ב-console (motion `initial` ב-SSR, סקשנים Music/About/Booking) — קיים מ-Phase 3, טרם תוקן.
 - Bandcamp embeds הם placeholder — צריך קודי iframe אמיתיים.
 
