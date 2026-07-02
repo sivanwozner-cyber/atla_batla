@@ -1,15 +1,7 @@
-import { events, type ShowEvent } from "@/data/events";
+import { upcomingShows, type ShowEvent } from "@/lib/content";
 import { Reveal } from "@/components/Reveal";
 import { cn } from "@/lib/utils";
 import { MapPin, Ticket } from "lucide-react";
-
-// PRD §4.2 + §6: לסנן date >= today, למיין עולה, הראשון = featured.
-function getUpcoming(list: ShowEvent[]): ShowEvent[] {
-  const today = new Date().toISOString().slice(0, 10);
-  return list
-    .filter((e) => e.date >= today)
-    .sort((a, b) => a.date.localeCompare(b.date));
-}
 
 function formatDate(iso: string): string {
   const d = new Date(`${iso}T00:00:00`);
