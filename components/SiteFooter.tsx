@@ -5,28 +5,27 @@ import {
   FaBandcamp,
   FaSoundcloud,
 } from "react-icons/fa6";
+import type { SiteContent, SocialLabel } from "@/lib/content";
 
-// PRD §4.6 — אייקוני רשתות (react-icons/fa6) + קרדיט קצר. קישורים אמיתיים,
-// אומתו ע"י סריקת העמודים (הלהקה מהנגב — לא namesakes).
-const SOCIALS: { icon: IconType; label: string; href: string }[] = [
-  { icon: FaInstagram, label: "Instagram", href: "https://www.instagram.com/atlabatla_suomi/" },
-  {
-    icon: FaFacebookF,
-    label: "Facebook",
-    href: "https://www.facebook.com/people/Atla-Batla-suomi/61578955019841/",
-  },
-  { icon: FaBandcamp, label: "Bandcamp", href: "https://atlabatla.bandcamp.com" },
-  { icon: FaSoundcloud, label: "SoundCloud", href: "https://soundcloud.com/atla-batla" },
-];
+// PRD §4.6 — אייקוני רשתות (react-icons/fa6) + קרדיט קצר. הרשתות נטענות מה-store
+// (נערכות ב-/admin/site); האייקון נגזר משם הרשת דרך המפה הזו.
+const ICONS: Record<SocialLabel, IconType> = {
+  Instagram: FaInstagram,
+  Facebook: FaFacebookF,
+  Bandcamp: FaBandcamp,
+  SoundCloud: FaSoundcloud,
+};
 
-export function SiteFooter() {
+export function SiteFooter({ socials }: { socials: SiteContent["socials"] }) {
   return (
     <footer className="border-t border-white/10 px-6 py-10">
       <div className="mx-auto flex max-w-5xl flex-col items-center gap-5">
         <div className="flex gap-3">
-          {SOCIALS.map(({ icon: Icon, label, href }) => (
+          {socials.map(({ id, label, href }) => {
+            const Icon = ICONS[label] ?? FaInstagram;
+            return (
             <a
-              key={label}
+              key={id}
               href={href}
               target="_blank"
               rel="noopener noreferrer"
