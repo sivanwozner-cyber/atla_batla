@@ -101,16 +101,17 @@
   * {
     @apply border-border outline-ring/50;
   }
-  body {
-    @apply bg-background text-foreground;
-    /* זוהר שקיעת מדבר עדין בתחתית + לילה למעלה */
-    background-image:
-      radial-gradient(120% 80% at 50% 120%, rgba(255, 89, 31, 0.18), transparent 55%),
-      radial-gradient(90% 60% at 80% -10%, rgba(122, 43, 214, 0.22), transparent 60%);
-    background-attachment: fixed;
-  }
   html {
     @apply font-sans;
+    /* בסיס לילה אטום בשכבה התחתונה ביותר — נצבע מתחת ל-.aurora (z-index:-1),
+       כדי ששכבת הרקע ה-fixed תהיה גלויה מעליו והתוכן מעליה. */
+    background-color: var(--background);
+  }
+  body {
+    @apply text-foreground;
+    /* שקוף בכוונה — שכבת ה-.aurora ה-fixed נחשפת מבעד לסקשנים השקופים
+       (הזוהר שהיה כאן עבר אל .aurora). */
+    background-color: transparent;
   }
 }
 
