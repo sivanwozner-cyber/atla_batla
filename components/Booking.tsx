@@ -27,9 +27,7 @@ export function Booking({ booking }: { booking: SiteContent["booking"] }) {
       <div className="mx-auto max-w-2xl text-center">
         <Reveal>
           <h2 className="wordmark text-4xl sm:text-5xl">Booking</h2>
-          <p className="mt-3 text-cream/70">
-            Promoters — get in touch. (מייל placeholder)
-          </p>
+          <p className="mt-3 text-cream/70">{blurb}</p>
 
           <a
             href={`mailto:${EMAIL}`}
