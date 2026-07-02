@@ -15,7 +15,7 @@ export function MusicEmbeds({ music }: { music: SiteContent["music"] }) {
 
         <div className="mt-8 grid gap-6 sm:grid-cols-2">
           {music.eps.map((ep, i) => (
-            <Reveal key={ep.title} delay={i * 0.08}>
+            <Reveal key={ep.id} delay={i * 0.08}>
               <div className="rounded-2xl border border-white/10 bg-card p-4">
                 <iframe
                   title={`${ep.title} — Atla Batla on Bandcamp`}
