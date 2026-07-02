@@ -36,3 +36,9 @@
 - **Decisions:** לוגו כתמונה ולא CSS (צורת PR מדויקת); keying ולא blend-mode. איות אומת ב-view (תקין).
 - **Notes / Caveats:** ר' Gotchas למעלה. 21:9 עבר timeout → נעשה ב-16:9 ונחתך.
 - **Related:** [[landing-page-components]], [[project-skeleton-and-documentation]]
+
+### 2026-07-02 — רה-ג'ינרוט hero (prompt נקי-מטקסט) [shipped]
+- **What was done:** הורץ שוב `generate:art` → `public/generated/hero-2.png`, ואז הוחלף פנימה כ-`hero.png` (הישן נשמר כ-`hero-prev.png` לריוורט קל). אותם 5 רפרנסים (82040/81697/11070/11251/11254), flash, 16:9, 2K. אומת דרך curl: `/`=200, ה-hero מוגש דרך `/_next/image`=200 (image/jpeg), והסטטי `/generated/hero.png`=200 (3,125,867B).
+- **Decisions:** prompt מחוזק עם איסור טקסט מפורש ("no text/letters/words, vehicles completely blank") — לתיקון הכיתוב המשובש "ATLA BATLA" שהמודל צייר על האוטובוס ב-hero הקודם. שמירת שטח שמיים פנוי במרכז-עליון ל-wordmark. נשאר flash (מוכח), לא pro. יצירה לקובץ חדש ואז swap — כי `public/generated/` gitignored (אין גיבוי git) והארטוורק הקיים היה טוב.
+- **Notes / Caveats:** הפלט החדש נקי מטקסט לגמרי (אומת ב-view). `.env.local` מכיל 2 שורות `GEMINI_API_KEY` — השנייה (`AQ.Ab8…`, OAuth-style) גוברת (last-wins ב-loadEnvFile) ו**עובדת** (לא צריך את ה-`AIza…`). `hero-prev.png`+`hero.png` שניהם gitignored.
+- **Related:** [[landing-page-components]], [[project-skeleton-and-documentation]], [[prd-document]]
