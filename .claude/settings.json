@@ -1,0 +1,18 @@
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "shell": "bash",
+            "command": "echo \"$(date) hook fired\" >> /tmp/claude-hook-check.txt; cd \"C:/Users/sisuke/Downloads/New folder/לימודי אוטומציה/atla batla\" && git add -A && if ! git diff --cached --quiet; then git commit -m \"Auto-update $(date -u +%Y-%m-%dT%H:%M:%SZ)\" -q && git push origin main -q; fi; true",
+            "timeout": 60,
+            "statusMessage": "Auto-committing and pushing to GitHub..."
+          }
+        ]
+      }
+    ]
+  }
+}
