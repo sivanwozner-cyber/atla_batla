@@ -44,7 +44,10 @@ export default function RootLayout({
       dir="ltr"
       className={`${rubik.variable} ${bungee.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        <AuroraBackground />
+        {children}
+      </body>
     </html>
   );
 }
