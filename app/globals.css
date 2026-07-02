@@ -381,8 +381,13 @@ html {
 .mo-bob {
   animation: mo-bob 3.4s ease-in-out infinite;
 }
+.mo-img {
+  display: block;
+  height: auto;
+  user-select: none;
+}
 .mo-ufo {
-  filter: drop-shadow(0 0 7px rgba(68, 238, 255, 0.55));
+  filter: drop-shadow(0 0 8px rgba(68, 238, 255, 0.5));
 }
 .mo-bus {
   filter: drop-shadow(0 0 9px rgba(255, 68, 170, 0.4));
