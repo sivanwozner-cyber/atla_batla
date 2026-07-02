@@ -13,8 +13,9 @@ function formatDate(iso: string): string {
   });
 }
 
-export function UpcomingShows() {
-  const shows = getUpcoming(events);
+// PRD §4.2 + §6: לסנן date >= today, למיין עולה, הראשון = featured. התוכן מ-store.
+export function UpcomingShows({ shows: all }: { shows: ShowEvent[] }) {
+  const shows = upcomingShows(all);
   // אם אין אירוע עתידי — הסקשן נעלם לגמרי (PRD §4.2), לא נשאר "אין הופעות" ריק.
   if (shows.length === 0) return null;
 
