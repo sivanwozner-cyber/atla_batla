@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Rubik, Bungee, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { AuroraBackground } from "@/components/AuroraBackground";
 
 // Rubik — פונט ה-UI הראשי (PRD §5): תמיכת עברית מצוינת, אופי עגול-משחקי.
 // variable: "--font-sans" כדי שיזרום אל token ה-font-sans של shadcn ב-globals.css.
