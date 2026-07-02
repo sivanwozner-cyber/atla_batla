@@ -51,18 +51,17 @@ export function Hero({ hero }: { hero: SiteContent["hero"] }) {
           />
         </h1>
         <p className="mt-6 max-w-xl text-lg text-cream/85 drop-shadow-[0_1px_8px_rgba(11,4,32,0.95)]">
-          From the blazing deserts to the global underground — pure Suomisoundi
-          madness and deep psychedelic energy.
+          {hero.tagline}
         </p>
         <a
-          href="#music"
+          href={hero.ctaHref}
           className={cn(
             buttonVariants({ size: "lg" }),
             "mt-8 h-12 gap-2 rounded-full px-8 text-base"
           )}
         >
           <Play className="size-5" />
-          Listen
+          {hero.ctaLabel}
         </a>
       </div>
     </section>
