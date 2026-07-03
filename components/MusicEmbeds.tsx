@@ -4,13 +4,13 @@ import type { SiteContent } from "@/lib/content";
 
 // PRD §4.3 — EPs ב-Bandcamp (Random Records). התוכן נטען מה-store (נערך ב-/admin/music).
 // שמות הטראקים נשמרים בדיוק כפי שהם, כולל שגיאות כתיב מכוונות — אסור "לתקן".
+// הוסר: פסקת ה-intro ("שני EPs ב-Bandcamp...") — טקסט placeholder לא רלוונטי.
 export function MusicEmbeds({ music }: { music: SiteContent["music"] }) {
   return (
     <section id="music" className="scroll-mt-14 px-6 py-20">
       <div className="mx-auto max-w-4xl">
         <Reveal>
           <h2 className="wordmark text-4xl sm:text-5xl">Music</h2>
-          <p className="mt-3 max-w-xl text-cream/70">{music.intro}</p>
         </Reveal>
 
         <div className="mt-8 grid gap-6 sm:grid-cols-2">

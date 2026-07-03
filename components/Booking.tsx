@@ -8,8 +8,9 @@ import { cn } from "@/lib/utils";
 import type { SiteContent } from "@/lib/content";
 
 // PRD §4.5 — מייל בולט, גדול, קליק-להעתקה. התוכן מה-store (נערך ב-/admin/site).
+// הוסר: פסקת blurb ("Promoters — get in touch...") — טקסט placeholder לא רלוונטי.
 export function Booking({ booking }: { booking: SiteContent["booking"] }) {
-  const { email: EMAIL, blurb } = booking;
+  const { email: EMAIL } = booking;
   const [copied, setCopied] = useState(false);
 
   async function copy() {
@@ -27,11 +28,10 @@ export function Booking({ booking }: { booking: SiteContent["booking"] }) {
       <div className="mx-auto max-w-2xl text-center">
         <Reveal>
           <h2 className="wordmark text-4xl sm:text-5xl">Booking</h2>
-          <p className="mt-3 text-cream/70">{blurb}</p>
 
           <a
             href={`mailto:${EMAIL}`}
-            className="mt-8 block break-all font-display text-3xl text-gold transition-colors hover:text-ember sm:text-4xl"
+            className="mt-6 block break-all font-display text-3xl text-gold transition-colors hover:text-ember sm:text-4xl"
           >
             {EMAIL}
           </a>
