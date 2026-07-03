@@ -56,3 +56,19 @@
 - [ ] [2026-07-01] עיצוב: ארטוורק Hero — להריץ את `generate:art` ולחבר את התמונה ל-Hero
   - הקשר: `GEMINI_API_KEY` כבר מוגדר ב-`.env.local`; רפרנסים מומלצים מ-`/examples`: `82040.jpg` (גמל טרמפיסט + אוטובוס מפלצת) ו-`11070.png` (קקטוסים + שמיים פסיכדליים כתום-סגול), aspect 16:9, size 2K; הקוד ב-`components/Hero.tsx` כבר מסמן placeholder לרקע הזה
   - עדיפות: בינונית
+
+- [ ] [2026-07-03] GEO: אופטימיזציה למנועי AI (Generative Engine Optimization)
+  - הקשר: עלה מבקשת המשתמש (03.07). המשתמש הבהיר (03.07) — הכוונה GEO = אופטימיזציה למנועי AI/תשובות (ChatGPT, Perplexity, Gemini, AI Overviews), לא SEO קלאסי או geo-targeting. כיוונים אפשריים: תוכן עובדתי ברור על הלהקה שמנועי AI יכולים לצטט, structured data/JSON-LD (MusicGroup schema), מטא-דאטה ו-Open Graph, `llms.txt`, נוכחות במקורות שה-AI סורק (Wikipedia/Bandcamp/רשתות). טעון החלטה על scope מדויק לפני ביצוע
+  - עדיפות: בינונית
+
+- [ ] [2026-07-03] רשתות חברתיות: להוסיף TikTok
+  - הקשר: עלה מבקשת המשתמש (03.07). דורש הוספה ל-`SocialLabel` ול-`SOCIAL_LABELS` ב-`lib/content.ts`, אייקון `FaTiktok` (react-icons/fa6) למפת `ICONS` ב-`components/SiteFooter.tsx`, וקישור בפועל דרך `/admin/site`
+  - עדיפות: בינונית
+
+- [ ] [2026-07-03] עיצוב: להגדיל את אזור הרשתות החברתיות
+  - הקשר: עלה מבקשת המשתמש (03.07). כיום הרשתות מופיעות רק ב-footer (`components/SiteFooter.tsx`) כאייקונים עגולים קטנים (`size-11`). המשתמש רוצה אזור בולט/גדול יותר — טעון החלטה על מיקום (footer מוגדל / סקשן ייעודי) וגודל
+  - עדיפות: בינונית
+
+- [ ] [2026-07-03] רשתות חברתיות: להוסיף ערוץ YouTube
+  - הקשר: עלה מבקשת המשתמש (03.07). כמו TikTok — הוספה ל-`SocialLabel`/`SOCIAL_LABELS` ב-`lib/content.ts`, אייקון `FaYoutube` למפת `ICONS` ב-`components/SiteFooter.tsx`, וקישור דרך `/admin/site`
+  - עדיפות: בינונית
