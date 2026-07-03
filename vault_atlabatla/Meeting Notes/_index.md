@@ -5,3 +5,4 @@
 ## Topics
 
 - [[project-skeleton-and-documentation]] — הקמת שלד `.claude/` ובניית ה-vault הראשוני לתיעוד הפרויקט
+- [[draft-sandbox-environment]] — סביבת טיוטה לוקאלית `app/draft/` (gitignored) לניסויים עיצוביים שלא עולים לורסל

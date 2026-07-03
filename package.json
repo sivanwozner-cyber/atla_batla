@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "generate:art": "node scripts/generate-art.mjs"
+    "generate:art": "node scripts/generate-art.mjs",
+    "promote:draft": "node scripts/promote-draft.mjs"
   },
   "dependencies": {
     "@base-ui/react": "^1.6.0",

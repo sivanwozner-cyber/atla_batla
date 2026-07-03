@@ -36,6 +36,12 @@ yarn-error.log*
 # vercel
 .vercel
 
+# ── סביבת טיוטה לוקאלית (design sandbox) ─────────────────────────────────────
+# כל מה שתחת app/draft/ הוא לניסויים עיצוביים לוקאליים בלבד. מתעלמים ממנו בכוונה
+# כדי שה-auto-commit → push → Vercel לעולם לא יתפוס אותו. שום דבר כאן לא עולה
+# לורסל. אם בכל זאת תרצה לקדם ניסוי — הוסף אותו ידנית עם `git add -f`.
+/app/draft/
+
 # gemini pipeline output (PRD §7) — keep the dir, ignore generated artwork
 /public/generated/*
 !/public/generated/.gitkeep
