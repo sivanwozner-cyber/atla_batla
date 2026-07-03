@@ -26,10 +26,10 @@ export default async function ProtectedAdminLayout({
             <Image
               src="/generated/wordmark.png"
               alt="Atla Batla"
-              width={2638}
-              height={846}
-              sizes="110px"
-              className="h-6 w-auto"
+              width={1229}
+              height={1015}
+              sizes="44px"
+              className="h-9 w-auto"
             />
             <span className="hidden text-sm font-bold text-cream/50 sm:inline">
               ניהול

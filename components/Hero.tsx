@@ -43,11 +43,11 @@ export function Hero({ hero }: { hero: SiteContent["hero"] }) {
           <Image
             src="/generated/wordmark.png"
             alt="Atla Batla"
-            width={2638}
-            height={846}
+            width={1229}
+            height={1015}
             priority
-            sizes="(max-width: 768px) 88vw, 760px"
-            className="h-auto w-[88vw] max-w-[760px] drop-shadow-[0_8px_28px_rgba(11,4,32,0.6)]"
+            sizes="(max-width: 768px) 80vw, 440px"
+            className="h-auto w-[80vw] max-w-[440px] drop-shadow-[0_8px_28px_rgba(11,4,32,0.6)]"
           />
         </h1>
         <p className="mt-6 max-w-xl text-lg text-cream/85 drop-shadow-[0_1px_8px_rgba(11,4,32,0.95)]">
