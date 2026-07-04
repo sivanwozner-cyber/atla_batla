@@ -59,6 +59,7 @@ export const defaultContent: SiteContent = {
     creditLabel: "Random Records",
     creditHref: "https://randomrecords.bandcamp.com",
     creditSuffix: " — a non-profit label supporting indigenous communities.",
+    videoUrl: "https://youtube.com/shorts/GINrPIkcOIE",
   },
   booking: {
     email: "atlabatlasuomi@gmail.com",

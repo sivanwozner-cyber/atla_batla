@@ -64,6 +64,7 @@ export interface SiteContent {
     creditLabel: string;
     creditHref: string;
     creditSuffix: string;
+    videoUrl: string;
   };
   booking: {
     email: string;
