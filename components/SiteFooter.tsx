@@ -4,6 +4,7 @@ import {
   FaFacebookF,
   FaTiktok,
   FaYoutube,
+  FaSpotify,
   FaBandcamp,
   FaSoundcloud,
 } from "react-icons/fa6";
@@ -16,6 +17,7 @@ const ICONS: Record<SocialLabel, IconType> = {
   Facebook: FaFacebookF,
   TikTok: FaTiktok,
   YouTube: FaYoutube,
+  Spotify: FaSpotify,
   Bandcamp: FaBandcamp,
   SoundCloud: FaSoundcloud,
 };

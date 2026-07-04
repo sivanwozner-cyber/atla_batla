@@ -27,6 +27,7 @@ export type SocialLabel =
   | "Facebook"
   | "TikTok"
   | "YouTube"
+  | "Spotify"
   | "Bandcamp"
   | "SoundCloud";
 export const SOCIAL_LABELS: SocialLabel[] = [
@@ -34,6 +35,7 @@ export const SOCIAL_LABELS: SocialLabel[] = [
   "Facebook",
   "TikTok",
   "YouTube",
+  "Spotify",
   "Bandcamp",
   "SoundCloud",
 ];
