@@ -103,6 +103,14 @@ export function AboutForm({ about }: { about: SiteContent["about"] }) {
           rows={4}
           dir="ltr"
         />
+        <Field
+          label="קישור לסרטון (YouTube)"
+          name="videoUrl"
+          defaultValue={about.videoUrl}
+          dir="ltr"
+          placeholder="https://youtube.com/shorts/..."
+          hint="קישור Shorts / watch / youtu.be — יוצג כאייפריים בסקשן About. שדה ריק = בלי סרטון."
+        />
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
           <Field
             label="טקסט לפני הקישור"
