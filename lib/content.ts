@@ -83,7 +83,12 @@ export const defaultContent: SiteContent = {
     {
       id: "youtube",
       label: "YouTube",
-      href: "https://youtube.com/shorts/GINrPIkcOIE",
+      href: "https://www.youtube.com/@atlabatlacrew3533",
+    },
+    {
+      id: "spotify",
+      label: "Spotify",
+      href: "https://open.spotify.com/artist/6luowSTwTxgEB6uOLp6iFf?si=Uv3LPRlXQE6ceFZgJ33OlQ",
     },
     { id: "bandcamp", label: "Bandcamp", href: "https://atlabatla.bandcamp.com" },
     {
