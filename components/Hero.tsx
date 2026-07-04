@@ -50,8 +50,8 @@ export function Hero({ hero }: { hero: SiteContent["hero"] }) {
           <Image
             src="/generated/wordmark.png"
             alt="Atla Batla"
-            width={1229}
-            height={1015}
+            width={2340}
+            height={1755}
             priority
             sizes="(max-width: 640px) 65vw, (max-width: 768px) 80vw, 440px"
             className="h-auto w-[65vw] max-w-[300px] drop-shadow-[0_8px_28px_rgba(11,4,32,0.6)] sm:w-[80vw] sm:max-w-[440px]"
