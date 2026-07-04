@@ -90,6 +90,7 @@ export async function saveAboutAction(
     creditLabel: str(formData, "creditLabel"),
     creditHref: str(formData, "creditHref"),
     creditSuffix: String(formData.get("creditSuffix") ?? ""),
+    videoUrl: str(formData, "videoUrl"),
   };
   await saveContent(content);
   revalidateSite();
