@@ -14,6 +14,7 @@
 - נבדקו aspect 16:9 (hero + wordmark). **21:9 עבר timeout (>4min)** — עדיף 16:9. 9:16/1:1 טרם נוסו.
 
 ## ⚠️ Gotchas ידועים
+- **quota=0 ≠ rate-limit זמני:** `429 RESOURCE_EXHAUSTED` עם `limit: 0` (ולא מספר קטן) ל-`generate_content_free_tier_requests` פירושו שלמפתח/לפרויקט אין בכלל הקצאת-חינם למודלי-תמונה — retry לא יעזור (בניגוד ל-"Please retry in Ns" שמופיע גם כשזו חסימה קבועה). דורש הפעלת billing בפרויקט Google AI Studio/Cloud המקושר למפתח, או מפתח מפרויקט אחר עם billing פעיל. נבדק על שני מודלים (`gemini-3.1-flash-image` וה-fallback `gemini-2.5-flash-image`) — שניהם נחסמו זהה, כך שהחלפת מודל לא עוקפת את זה. ר' [[psychedelic-background-redesign#2026-07-04]].
 - **שקיפות מזויפת:** בקשת רקע שקוף (alpha) → המודל **מצייר דפוס שח-מט אפור אטום** (כל הפיקסלים A=255, ~RGB 240/240/240) במקום alpha אמיתי. פתרון: chroma-key בקוד להסרת האפור (רוויה נמוכה + בהירות גבוהה → alpha 0) ואז חיתוך לגבולות. שימוש ב-C# inline + GDI+ `LockBits` (מהיר; לולאת PowerShell על מיליוני פיקסלים איטית מדי). ר' Phase 6 ב-[[project-skeleton-and-documentation]].
 - **טקסט:** מודלי תמונה נוטים לשבש איות — תמיד לאמת ב-`view`. בלוגו "ATLA BATLA" זה יצא נכון (עם הנחיה מפורשת של האיות אות-אות). **באיור סצנה (hero)** להפך — המודל נוטה לצייר טקסט משובש על אביזרים (ה-hero הראשון קיבל "ATLA BATLA" מעוות על האוטובוס); לכן ב-prompt של סצנה יש **לאסור טקסט מפורשות** ("no text/letters/words, vehicles completely blank") — עבד ב-2026-07-02.
 

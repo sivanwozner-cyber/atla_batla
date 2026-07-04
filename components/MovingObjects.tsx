@@ -13,7 +13,7 @@ type Obj = {
   top?: string;
   bottom?: string;
   left?: string;
-  dur: string;
+  dur?: string;
   bob?: boolean;
 };
 

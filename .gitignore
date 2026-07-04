@@ -45,9 +45,10 @@ yarn-error.log*
 # gemini pipeline output (PRD §7) — keep the dir, ignore generated artwork
 /public/generated/*
 !/public/generated/.gitkeep
-# ...חוץ משתי התמונות שהאתר תלוי בהן (רקע Hero + wordmark) — חייבות להיכנס ל-git לדיפלוי
+# ...חוץ מהתמונות שהאתר תלוי בהן (רקע Hero + wordmark + רקע אמצע/תחתית) — חייבות להיכנס ל-git לדיפלוי
 !/public/generated/hero.png
 !/public/generated/wordmark.png
+!/public/generated/background.png
 # אובייקטים מצוירים לרקע אמצע/תחתית (sprites שקופים) — חייבים להיכנס ל-git לדיפלוי
 !/public/generated/obj-*.png
 
