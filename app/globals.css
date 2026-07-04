@@ -479,3 +479,207 @@ html {
     animation: none;
   }
 }
+
+/* ──────────────────────────────────────────────────────────────
+   Psychedelic Desert Sunset — רקע האמצע+תחתית (מחליף את .aurora לאזור זה).
+   משחזר את ה-vibe של עטיפת האלבום: שמי-מדבר רציפים שמתחילים בלילה מתחת ל-Hero
+   → סגול עמוק → מג'נטה → כתום שקיעה → זוהר זהב באופק → אדמת דמדומים מתחת ל-footer.
+   הפס העליון (0%) == --night כדי להתמזג עם ה-Hero (שדוהה ל-night) — בלי חיתוך.
+   שכבה absolute אטומה בתוך .pb-region (relative+isolate), מכסה את בסיס הלילה.
+   הכל CSS, מכבד prefers-reduced-motion. שימוש: <PsychedelicBackground /> בתוך
+   .pb-region ב-app/page.tsx. ────────────────────────────────────────────────── */
+.pb-region {
+  position: relative;
+  isolation: isolate;
+}
+
+.pb-backdrop {
+  position: absolute;
+  inset: 0;
+  z-index: -20;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+/* שמי השקיעה — גרדיאנט אנכי. הפס העליון == --night (מתמזג עם ה-Hero) */
+.pb-sky {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    #0b0420 0%,
+    #160734 8%,
+    #280e50 20%,
+    #471873 33%,
+    #7c2680 46%,
+    #b8325f 58%,
+    #e85433 69%,
+    #ff8324 79%,
+    #ffa838 87%,
+    #a24a1c 94%,
+    #37130f 100%
+  );
+}
+
+/* שמש-הזהב בשמיים העליונים — דיסקה רכה */
+.pb-sun {
+  position: absolute;
+  left: 50%;
+  top: 12%;
+  width: 78vmax;
+  height: 78vmax;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(
+    circle,
+    rgba(255, 246, 210, 0.9) 0%,
+    rgba(255, 214, 110, 0.55) 9%,
+    rgba(255, 150, 55, 0.22) 20%,
+    rgba(255, 110, 40, 0.08) 32%,
+    transparent 50%
+  );
+  mix-blend-mode: screen;
+}
+
+/* קרני-ספירלה מסביב לשמש — נעות לאט, ממוסכות לעיגול רך */
+.pb-rays {
+  position: absolute;
+  left: 50%;
+  top: 12%;
+  width: 150vmax;
+  height: 150vmax;
+  transform: translate(-50%, -50%);
+  background: repeating-conic-gradient(
+    from 0deg,
+    rgba(255, 225, 150, 0.1) 0deg 5deg,
+    transparent 5deg 13deg
+  );
+  -webkit-mask: radial-gradient(circle, #000 0%, rgba(0, 0, 0, 0.5) 20%, transparent 46%);
+  mask: radial-gradient(circle, #000 0%, rgba(0, 0, 0, 0.5) 20%, transparent 46%);
+  mix-blend-mode: screen;
+  animation: pb-spin 140s linear infinite;
+}
+
+/* "אור נוזלי" מרחף — blur גדול שומר על קריאוּת הטקסט */
+.pb-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  mix-blend-mode: screen;
+  opacity: 0.42;
+  will-change: transform;
+}
+.pb-blob-1 {
+  top: 26%;
+  left: -10%;
+  width: 52vw;
+  height: 52vw;
+  background: radial-gradient(circle, var(--magenta), transparent 66%);
+  animation: pb-drift-a 30s ease-in-out infinite;
+}
+.pb-blob-2 {
+  top: 52%;
+  right: -12%;
+  width: 48vw;
+  height: 48vw;
+  background: radial-gradient(circle, var(--sunset), transparent 64%);
+  animation: pb-drift-b 36s ease-in-out infinite;
+}
+.pb-blob-3 {
+  top: 6%;
+  right: 6%;
+  width: 34vw;
+  height: 34vw;
+  background: radial-gradient(circle, var(--violet), transparent 68%);
+  opacity: 0.32;
+  animation: pb-drift-b 44s ease-in-out infinite reverse;
+}
+
+/* כוכבים — רק בשמי הלילה העליונים, דוהים כשהשמיים מתחממים */
+.pb-stars {
+  position: absolute;
+  inset: 0;
+  opacity: 0.5;
+  background-image:
+    radial-gradient(1.4px 1.4px at 12% 6%, #fff, transparent),
+    radial-gradient(1.2px 1.2px at 32% 12%, rgba(255, 255, 255, 0.85), transparent),
+    radial-gradient(1.4px 1.4px at 58% 5%, #fff, transparent),
+    radial-gradient(1px 1px at 76% 14%, rgba(255, 255, 255, 0.8), transparent),
+    radial-gradient(1.4px 1.4px at 88% 8%, #fff, transparent),
+    radial-gradient(1px 1px at 44% 18%, rgba(255, 255, 255, 0.7), transparent),
+    radial-gradient(1.2px 1.2px at 22% 22%, rgba(255, 255, 255, 0.7), transparent);
+  -webkit-mask: linear-gradient(to bottom, #000 0%, #000 14%, transparent 32%);
+  mask: linear-gradient(to bottom, #000 0%, #000 14%, transparent 32%);
+  animation: pb-tw 6s ease-in-out infinite;
+}
+
+/* וינייטה — מחשיך שוליים לעומק + מרכך את בוהק הצבע לטובת קריאוּת הטקסט */
+.pb-vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    120% 90% at 50% 45%,
+    rgba(11, 4, 32, 0.15) 0%,
+    rgba(11, 4, 32, 0.5) 100%
+  );
+}
+
+/* פס-תפר עליון — night→שקוף על גבול ה-Hero, ביטוח נגד "חיתוך" */
+.pb-seam {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 30svh;
+  z-index: -5;
+  pointer-events: none;
+  background: linear-gradient(
+    to bottom,
+    var(--night) 0%,
+    var(--night) 6%,
+    rgba(11, 4, 32, 0) 100%
+  );
+}
+
+@keyframes pb-spin {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+@keyframes pb-tw {
+  0%,
+  100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+@keyframes pb-drift-a {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(10%, 6%, 0) scale(1.2);
+  }
+}
+@keyframes pb-drift-b {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1.1);
+  }
+  50% {
+    transform: translate3d(-12%, 8%, 0) scale(1.28);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pb-rays,
+  .pb-blob,
+  .pb-stars {
+    animation: none;
+  }
+}

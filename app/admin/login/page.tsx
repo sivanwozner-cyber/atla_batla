@@ -26,9 +26,9 @@ export default async function LoginPage({
           <Image
             src="/generated/wordmark.png"
             alt="Atla Batla"
-            width={2638}
-            height={846}
-            sizes="200px"
+            width={1229}
+            height={1015}
+            sizes="48px"
             className="h-10 w-auto"
             priority
           />

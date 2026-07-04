@@ -3,6 +3,7 @@
 import { getContent } from "@/lib/content";
 import { SiteHeader } from "@/components/SiteHeader";
 import { Hero } from "@/components/Hero";
+import { PsychedelicBackground } from "@/components/PsychedelicBackground";
 import { MovingObjects } from "@/components/MovingObjects";
 import { UpcomingShows } from "@/components/UpcomingShows";
 import { MusicEmbeds } from "@/components/MusicEmbeds";
@@ -16,19 +17,30 @@ export default async function Home() {
   return (
     <>
       <SiteHeader />
-      <main className="flex-1">
+      <main className="flex flex-1 flex-col">
+        {/* החלק העליון — ללא נגיעה */}
         <Hero hero={content.hero} />
-        {/* אמצע+תחתית: wrapper עם isolation ליצירת stacking-context מקומי, כך
-            ש-MovingObjects (‎-z-10) יושב מאחורי הסקשנים אך לא מאחורי ה-Hero. */}
-        <div className="relative isolate">
+
+        {/* אמצע+תחתית: אזור עם רקע שקיעת-מדבר משלו. הפס העליון של הרקע == --night
+            (כמו תחתית ה-Hero) → מעבר גרדיאנט חלק בלי חיתוך. isolation יוצר
+            stacking-context מקומי: הרקע (‎-z-20) וה-MovingObjects (‎-z-10) יושבים
+            מאחורי הסקשנים אך מכסים את בסיס הלילה. flex-1 דוחף את ה-footer לתחתית. */}
+        <div className="pb-region flex flex-1 flex-col">
+          <PsychedelicBackground />
+          {/* פס-תפר: night→שקוף בדיוק על גבול ה-Hero, ביטוח כפול נגד חיתוך */}
+          <div className="pb-seam" aria-hidden />
           <MovingObjects />
-          <UpcomingShows shows={content.shows} />
-          <MusicEmbeds music={content.music} />
-          <About about={content.about} />
-          <Booking booking={content.booking} />
+
+          <div className="flex-1">
+            <UpcomingShows shows={content.shows} />
+            <MusicEmbeds music={content.music} />
+            <About about={content.about} />
+            <Booking booking={content.booking} />
+          </div>
+
+          <SiteFooter socials={content.socials} />
         </div>
       </main>
-      <SiteFooter socials={content.socials} />
     </>
   );
 }
