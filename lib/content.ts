@@ -61,8 +61,8 @@ export const defaultContent: SiteContent = {
     creditSuffix: " — a non-profit label supporting indigenous communities.",
   },
   booking: {
-    email: "booking@atlabatla.com",
-    blurb: "Promoters — get in touch. (מייל placeholder)",
+    email: "atlabatlasuomi@gmail.com",
+    blurb: "Promoters — get in touch.",
   },
   socials: [
     {
@@ -74,6 +74,16 @@ export const defaultContent: SiteContent = {
       id: "facebook",
       label: "Facebook",
       href: "https://www.facebook.com/people/Atla-Batla-suomi/61578955019841/",
+    },
+    {
+      id: "tiktok",
+      label: "TikTok",
+      href: "https://www.tiktok.com/@atla.batla",
+    },
+    {
+      id: "youtube",
+      label: "YouTube",
+      href: "https://youtube.com/shorts/GINrPIkcOIE",
     },
     { id: "bandcamp", label: "Bandcamp", href: "https://atlabatla.bandcamp.com" },
     {

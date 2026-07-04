@@ -37,10 +37,10 @@ export function SiteHeader() {
           <Image
             src="/generated/wordmark.png"
             alt="Atla Batla"
-            width={2638}
-            height={846}
-            sizes="120px"
-            className="h-7 w-auto"
+            width={1229}
+            height={1015}
+            sizes="48px"
+            className="h-10 w-auto"
           />
         </a>
 
@@ -87,10 +87,10 @@ export function SiteHeader() {
                   <Image
                     src="/generated/wordmark.png"
                     alt="Atla Batla"
-                    width={2638}
-                    height={846}
-                    sizes="120px"
-                    className="h-6 w-auto"
+                    width={1229}
+                    height={1015}
+                    sizes="40px"
+                    className="h-8 w-auto"
                   />
                 </SheetTitle>
                 <nav className="mt-4 flex flex-col gap-1 px-2">
