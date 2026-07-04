@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Rubik, Bungee, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { AuroraBackground } from "@/components/AuroraBackground";
 import { getContent } from "@/lib/content";
 
 // Rubik — פונט ה-UI הראשי (PRD §5): תמיכת עברית מצוינת, אופי עגול-משחקי.
@@ -49,7 +48,6 @@ export default function RootLayout({
       className={`${rubik.variable} ${bungee.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
-        <AuroraBackground />
         {children}
       </body>
     </html>
