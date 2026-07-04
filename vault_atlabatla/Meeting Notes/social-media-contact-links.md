@@ -4,7 +4,7 @@
 עדכון רשתות חברתיות ופרטי יצירת קשר באתר: הוספת TikTok ו-YouTube לפוטר (רכיב `SiteFooter`, מודל `SocialLabel`/`socials` ב-`lib/content-types.ts`/`lib/content.ts`/`data/site-content.json`), ועדכון מייל ה-Booking לכתובת האמיתית `atlabatlasuomi@gmail.com`. הכל נבנה תחילה בסביבת הטיוטה (`app/draft/social-links/`, ר' [[draft-sandbox-environment]]) ואומת ב-dev server, ואז קודם לקבצי הפרודקשן עם `npm run promote:draft` לבקשת המשתמשת המפורשת ("לדחוף לורסל").
 
 ## Open Questions
-- קישור ה-YouTube שסופק הוא Shorts ספציפי (`youtube.com/shorts/GINrPIkcOIE`), לא ערוץ — לבדוק מול המשתמשת אם בעתיד רוצים להחליף לקישור לערוץ הכללי כשיהיה.
+- none
 
 ## Session Log
 
@@ -19,3 +19,9 @@
 - **Decisions:** לא נמחקה הרשומה הישנה — נוספה רשומה מתקנת, לפי כללי ה-vault.
 - **Notes / Caveats:** ר' [[vercel-deploy-health]] לפירוט המלא.
 - **Related:** [[vercel-deploy-health]], [[psychedelic-background-redesign]]
+
+### 2026-07-04 — עדכון YouTube לערוץ + הוספת Spotify [shipped]
+- **What was done:** לבקשת המשתמשת: קישור ה-YouTube הוחלף מה-Short הבודד (`youtube.com/shorts/GINrPIkcOIE`) לערוץ (`https://www.youtube.com/@atlabatlacrew3533`); נוסף ערך חדש `Spotify` ל-`SocialLabel`/`SOCIAL_LABELS` (`lib/content-types.ts`), אייקון `FaSpotify` ב-`components/SiteFooter.tsx`, וערך `socials` חדש ב-`lib/content.ts`+`data/site-content.json` עם ה-href שסופק. נבנה כטיוטה (`app/draft/social-links-v2/`), אומת ב-`next dev`+curl, קודם עם `npm run promote:draft -- social-links-v2` אחרי אישור מפורש ("נראה טוב תמזג"). שתי תיקיות הטיוטה הישנות (`social-links/`, `social-links-v2/`) נמחקו אחרי הקידום כדי לא להשאיר סימוני `@promote-to` לא-רלוונטיים.
+- **Decisions:** (1) מיקום Spotify בפוטר: אחרי YouTube ולפני Bandcamp — יחד עם שאר פלטפורמות המוזיקה (Bandcamp/SoundCloud). (2) לפני הריצה בפועל, סוננה הפעולה (`promote:draft -- social-links-v2`) כדי לא להריץ בטעות גם את תיקיית הטיוטה הישנה `social-links/` שעדיין נשאה סימוני `@promote-to` מהסשן הקודם.
+- **Notes / Caveats:** `rm -rf .next` נדרש לפני `tsc --noEmit` כי ה-route type validator של Next הצביע על עמודי הטיוטה שנמחקו; אחרי הניקוי — typecheck+eslint נקיים לגמרי (גם שגיאות ה-`MovingObjects.tsx` הישנות כבר לא מופיעות, תוקנו ב-session קודם, ר' [[psychedelic-background-redesign]]).
+- **Related:** [[vercel-deploy-health]], [[psychedelic-background-redesign]], [[draft-sandbox-environment]]
