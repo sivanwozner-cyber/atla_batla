@@ -4,7 +4,6 @@
 החלפת ה-wordmark של האתר (הנוכחי: "ATLA ⚡ BATLA" בסגנון Power Rangers, `public/generated/wordmark.png`, רחב 2638×846) בלוגו חדש שהמשתמשת סיפקה: **"ATLA BATLA" בסגנון מטאל/אש** — אותיות תראש עם מילוי להבות כתום-אדום, קו-מתאר כרום, וקו-מתאר שחור חיצוני (die-cut sticker). המקור: `examples/logo/WhatsApp Image 2026-07-02 at 20.23.43.jpeg` (JPEG על **רקע לבן** 252,252,252). **אושר וקודם לפרודקשן** (2026-07-03, commit `5c02c12`): `wordmark.png` הוחלף + עודכנו הממדים/גדלים ב-5 השימושים; טיוטת המקור נשארה ב-`app/draft/logo/`. הלוגו החדש כמעט-ריבועי (~1.21:1, שתי שורות) לעומת הישן הרחב (3.12:1) — לכן הגדלתי את גובה הלוגו בהדר.
 
 ## Open Questions
-- לאמת שה-deploy ב-Vercel עלה ומציג את הלוגו נכון. **ה-next/image dev optimizer נתקע לוקאלית** (גם על `hero.png` שלא נגעתי בו) — כנראה מגבלת סביבת ה-sandbox, לא הקוד; Vercel מייצר אופטימיזציה טרייה. אם בפרודקשן משהו נראה חתוך/מעוות — לבדוק שם.
 - אולי כיוונון עדין של גובה הלוגו (הדר/מובייל/אדמין) אחרי צפייה בפרודקשן. הערכים הנוכחיים: הדר `h-10`, sheet `h-8`, admin-layout `h-9`, admin-login `h-10`, Hero `max-w-[440px]`.
 
 ## Session Log
@@ -26,3 +25,9 @@
 - **Decisions:** דריסת `wordmark.png` (ולא קובץ חדש) כי רק הוא ב-whitelist של `.gitignore` שמגיע לורסל (`wordmark-metal.png` נשאר ignored, מזין רק את הטיוטה). גדלים: הדר 28→40px. **קומיט סלקטיבי** — רק קבצי הלוגו; השארתי בחוץ WIP לא-קשור (`globals.css`/`layout.tsx`/`page.tsx`/`PsychedelicBackground.tsx` = עבודת [[psychedelic-background-redesign]], + מצב obsidian).
 - **Notes / Caveats:** אימות לוקאלי חלקי — ה-next/image dev optimizer נתקע (env, לא הקוד: נתקע גם על `hero.png` שלא שונה, וזו הסיבה ל-timeout ב-`preview_screenshot`/eval). אומת: הנכס הגולמי מוגש 1229×1015 שקוף + הקומפוננטות פולטות `width/height` נכונים ב-DOM + מראה ויזואלי דרך קומפוזיט sharp ידני.
 - **Related:** [[gemini-art-script]], [[landing-page-components]], [[draft-sandbox-environment]], [[psychedelic-background-redesign]]
+
+### 2026-07-04 — תיקון: ה-deploy הזה מעולם לא עלה עד עכשיו [shipped]
+- **What was done:** בדיקת Vercel MCP (ר' [[vercel-deploy-health]]) גילתה של-commit `5c02c12` (הרשומה למעלה) היה בפועל `state: ERROR` — שגיאת type ב-`components/MovingObjects.tsx` (לא קשור ללוגו) שברה את **כל** build עד `2026-07-04`. הלוגו המטאלי **לא היה חי בפרודקשן** מאז ה-`[shipped]` המקורי ועד שהבאג תוקן. עכשיו, אחרי commit `cc58df7`, האתר החי (`atla-batla.vercel.app`) אכן מציג את הלוגו החדש.
+- **Decisions:** לא נמחקה הרשומה הישנה — נוספה רשומה מתקנת, לפי כללי ה-vault.
+- **Notes / Caveats:** ר' [[vercel-deploy-health]] לפירוט המלא של הבאג ושרשרת ה-deployments.
+- **Related:** [[vercel-deploy-health]], [[psychedelic-background-redesign]]

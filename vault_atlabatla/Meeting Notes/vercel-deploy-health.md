@@ -1,0 +1,18 @@
+# Vercel Deploy Health
+
+## Overview
+עוקב אחרי בריאות ה-deploy בפרודקשן (Vercel MCP, project `atla-batla` / `prj_3JQkSH7BQWvk3hs8voZjaoN6Iagp`, team `atlabatla`/`team_9ToQRHZoPR6SgI8FXOkNYivg`). **תגלית קריטית (2026-07-04):** מ-commit `8c28d4f` ("draft-first workflow") ועד `510ae5f` ("Booking CTA #2") — **כל** deployment בפרודקשן חזר `state: ERROR` (build נכשל), כולל הלוגו המטאלי/אש (`5c02c12`), הכפתור-CTA לבוקינג (`510ae5f`), ורשתות-חברתיות+מייל-בוקינג (`34d202e`/PR#1). כלומר: כל אלה **נכתבו, נדחפו ל-git, וסומנו `[shipped]` ב-vault — אבל מעולם לא עלו בפועל לאתר החי** עד ש-commit `cc58df7` (רקע Gemini + הסרת-גמל, ר' [[psychedelic-background-redesign]]) תיקן את שגיאת ה-build ששברה את כולם. ה-deployment האחרון שהצליח באמת (`READY`) לפני זה היה מ-`2026-07-02T14:24:19Z` (commit `7d27f87`, "Auto-update") — כלומר האתר החי הציג גרסה ישנה במשך כל התקופה הזו.
+
+**שורש הבעיה:** `components/MovingObjects.tsx` — טיפוס `Obj.dur` הוגדר כ-required, אבל 4 רשומות-פטריות ב-`OBJECTS` (נייחות, לא חוצות מסך) לא כללו `dur` — התנגשות עם הלוגיקה שלה (‏`const isMover = !!o.dur`‏ כבר מטפלת בהיעדרו). `next build` (בניגוד ל-`next dev`) מריץ type-check מלא וקורס על כך; Vercel מריץ `next build`. סשן ה-social-links (2026-07-04, ר' [[social-media-contact-links]]) בדק `npx tsc --noEmit` וזיהה את השגיאה, אבל סיווג אותה כ"קיימת-מראש, לא קשורה" בלי לקשר זאת ל-build המלא/דיפלוי. **תוקן** ב-`cc58df7`: `dur?: string` (אופציונלי) — שינוי טיפוס בלבד, אפס שינוי בהתנהגות.
+
+## Open Questions
+- אין hook/CI שמריץ `npm run build` לפני push — כל הבאג הזה עבר בלי שאף session ירים דגל, כי אימות מקומי (curl/dev server) לא type-checks באגרסיביות. שווה לשקול: git hook פשוט (`pre-push`: `npm run build`) שהיה תופס את זה מיידית. לא מומש — רק תועד כאן כהמלצה.
+- `list_projects` על team `atlabatla` מחזיר תמיד מערך ריק (גם עכשיו) — אבל `get_project`/`get_deployment`/`list_deployments` עם ה-projectId/slug המדויק (`atla-batla`) עובדים מצוין. ה-workaround: לחפש בסלאג הידוע, לא להסתמך על `list_projects`.
+
+## Session Log
+
+### 2026-07-04 — גילוי: שרשרת deployments שבורה, תוקנה [shipped]
+- **What was done:** לבקשת המשתמשת ("תעשה סריקה שכל השינויים יעלו לגיטהאב ולורסל... תבדוק שהדיפלוי עובר תקין") נבדק ה-deploy דרך Vercel MCP אחרי push של `cc58df7`. `get_project`/`list_deployments` חשפו: 15+ deployments רצופים ב-`state: ERROR` לאורך כל ההיסטוריה מ-2026-07-02 עד היום, עם `githubCommitMessage` שתואם בדיוק ל-commits שסומנו `[shipped]` ב-vault (`5c02c12` לוגו, `510ae5f` booking CTA, `34d202e` social links). `get_deployment_build_logs` על `dpl_BzQedXnAHxky2nQrgMhQujYeaHc5` (commit `510ae5f`) אישר: אותה שגיאת `MovingObjects.tsx:25:3` בדיוק שתוקנה כאגב-דרך בזמן קידום ה-background (ר' [[psychedelic-background-redesign]]). אחרי ה-push של `cc58df7`: `get_deployment` על ה-deployment החדש (`dpl_8YN32HSvpTz6VdJeQ6YthAC19C9U`) מראה `state: READY`, `target: production`, `aliasError: null` (כל 3 הדומיינים — `atla-batla.vercel.app` ואחרים — מכוונים אליו). `get_runtime_errors` (חלון 2h) — 0 שגיאות.
+- **Decisions:** נוצר topic נפרד (ולא רק הערה בתוך [[psychedelic-background-redesign]]) כי זו עובדה חוצה-פרויקט קריטית — כל session עתידי שתוהה "למה X לא מופיע באתר החי" צריך למצוא את זה מיד, לא קבור בתוך topic של feature ספציפי.
+- **Notes / Caveats:** תוקנו גם: `logo-metal-replacement.md` ו-`social-media-contact-links.md` קיבלו רשומת-תיקון קצרה (לא נמחקה הרשומה הישנה — לפי כללי ה-vault, סטטוס משתנה = רשומה חדשה). ייתכן שיש deployments נוספים שנכשלו מסיבות אחרות בעתיד — הכלי `get_deployment_build_logs` עם `errorsOnly:true` הוא הדרך המהירה לאבחן.
+- **Related:** [[psychedelic-background-redesign]], [[logo-metal-replacement]], [[social-media-contact-links]], [[draft-sandbox-environment]]
