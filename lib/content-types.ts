@@ -22,10 +22,18 @@ export interface EP {
   tracks: string[];
 }
 
-export type SocialLabel = "Instagram" | "Facebook" | "Bandcamp" | "SoundCloud";
+export type SocialLabel =
+  | "Instagram"
+  | "Facebook"
+  | "TikTok"
+  | "YouTube"
+  | "Bandcamp"
+  | "SoundCloud";
 export const SOCIAL_LABELS: SocialLabel[] = [
   "Instagram",
   "Facebook",
+  "TikTok",
+  "YouTube",
   "Bandcamp",
   "SoundCloud",
 ];

@@ -2,6 +2,8 @@ import type { IconType } from "react-icons";
 import {
   FaInstagram,
   FaFacebookF,
+  FaTiktok,
+  FaYoutube,
   FaBandcamp,
   FaSoundcloud,
 } from "react-icons/fa6";
@@ -12,6 +14,8 @@ import type { SiteContent, SocialLabel } from "@/lib/content";
 const ICONS: Record<SocialLabel, IconType> = {
   Instagram: FaInstagram,
   Facebook: FaFacebookF,
+  TikTok: FaTiktok,
+  YouTube: FaYoutube,
   Bandcamp: FaBandcamp,
   SoundCloud: FaSoundcloud,
 };
