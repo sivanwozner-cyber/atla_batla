@@ -37,8 +37,8 @@ export function SiteHeader() {
           <Image
             src="/generated/wordmark.png"
             alt="Atla Batla"
-            width={1229}
-            height={1015}
+            width={2340}
+            height={1755}
             sizes="48px"
             className="h-10 w-auto"
           />
@@ -87,8 +87,8 @@ export function SiteHeader() {
                   <Image
                     src="/generated/wordmark.png"
                     alt="Atla Batla"
-                    width={1229}
-                    height={1015}
+                    width={2340}
+                    height={1755}
                     sizes="40px"
                     className="h-8 w-auto"
                   />
