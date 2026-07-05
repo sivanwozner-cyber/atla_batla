@@ -15,7 +15,7 @@
     }
   ],
   "music": {
-    "intro": "שני EPs ב-Bandcamp. שמות הטראקים נשמרים בדיוק כפי שהם — כולל שגיאות כתיב מכוונות.",
+    "intro": "שלושה שחרורים ב-Bandcamp. שמות הטראקים נשמרים בדיוק כפי שהם — כולל שגיאות כתיב מכוונות.",
     "eps": [
       {
         "id": "smoke-this-ep",
@@ -38,6 +38,18 @@
           "Angelic Camels",
           "Power Rangers (Tribute)",
           "Black Crows"
+        ]
+      },
+      {
+        "id": "starlight-distortion",
+        "title": "Starlight Distortion — Sattel Battle Vs. Atla Batla",
+        "href": "https://zerarecords.bandcamp.com/album/sattel-battle-vs-atla-batla-starlight-distortion",
+        "albumId": "442056697",
+        "tracks": [
+          "Temporary Enlightment",
+          "Acid Ducks",
+          "Starlight Distortion",
+          "Negev Chemicals"
         ]
       }
     ]
@@ -93,6 +105,6 @@
   ],
   "site": {
     "title": "Atla Batla",
-    "description": "Atla Batla — from the blazing deserts of the Negev to the global underground. (placeholder)"
+    "description": "Atla Batla — from the blazing deserts of the Negev to the global underground."
   }
 }

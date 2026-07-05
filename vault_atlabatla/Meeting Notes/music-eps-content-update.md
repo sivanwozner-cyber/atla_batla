@@ -1,0 +1,21 @@
+# Music EPs Content Update
+
+## Overview
+תהליך לעדכון מקטע ה-Music (`data/site-content.json` → `music.eps`, נערך גם דרך `/admin/music`) כשיוצא שחרור חדש. איתור השחרור נעשה בפועל דרך scraping (Bright Data connector: `scrape_as_markdown`/`scrape_as_html`/`search_engine`) על Bandcamp/Facebook/Instagram — לא הייתה לינק ישיר מהמשתמשת. תוצאת ה-scrape מוזרקת לטיוטה (`app/draft/`) לפי מדיניות draft-first; קידום בפועל ל-`data/site-content.json` (ומשם לורסל) קורה רק בהוראה מפורשת.
+
+## Open Questions
+- לא אושר עדיין קידום ל-production — שתי הטיוטות (EP חדש + תיקון hydration) מוצגות, ממתינות ל"לדחוף לורסל".
+
+## Session Log
+
+### 2026-07-05 — איתור ותצוגת-טיוטה של EP חדש: Starlight Distortion [wip]
+- **What was done:** המשתמשת ביקשה לעדכן EP חדש שיצא, בלי לתת קישור, וביקשה שימוש בקונקטור Bright Data לאיתור. חיפוש ב-`atlabatla.bandcamp.com` ו-`randomrecords.bandcamp.com` (הלייבלים הקיימים באתר) לא העלה שחרור חדש מעבר למה שכבר קיים באתר (Smoke This EP, Funk Them All). חיפוש רחב יותר (`search_engine` + Facebook group "Suomisaundi «» Spugedelic trance") העלה שחרור מ-4.7.2026: **"Starlight Distortion"** — שיתוף פעולה בין Sattel Battle ל-Atla Batla, יצא תחת לייבל חדש **Zera Records** (`zerarecords.bandcamp.com`), לא Random Records. 4 טראקים: Temporary Enlightment (08:16), Acid Ducks (06:10), Starlight Distortion (06:44), Negev Chemicals (08:32). Album ID לאמבד (`442056697`) נשלף מ-`scrape_as_html` (meta `bc-page-properties`/JSON-LD). נבנתה טיוטה תחת `app/draft/music-starlight-distortion/page.tsx` — עותק מינימלי (SiteHeader+MusicEmbeds+SiteFooter) שמזריק את ה-EP החדש לרשימת ה-`eps` הקיימת מ-`getContent()` בלי לגעת ב-`data/site-content.json`. אומת ב-Preview: העמבד נטען (artwork+פלייר+רשימת טראקים תקינה), אין שגיאות קונסולה חדשות. המשתמשת ביקשה שסדר התצוגה יהיה שם-אלבום ואז אמנים — עודכן `ep.title` ל-`"Starlight Distortion — Sattel Battle Vs. Atla Batla"` (השם ב-Bandcamp עצמו הוא ההפך: artist-first).
+- **Decisions:** (1) לא נגעתי ב-`data/site-content.json` בהתאם למדיניות draft-first ב-`CLAUDE.md` — למרות שקיים `/admin/music` כמנגנון legit לעדכון תוכן כזה, ההוראה לא כללה "לדחוף לורסל" במפורש. (2) בניתי עמוד טיוטה ממוקד (לא הרחבתי את ה-playground הקיים) כי זה שינוי-תוכן נקודתי, לא שינוי מבנה עמוד. (3) לא "תיקנתי" את שם הטראק "Temporary Enlightment" (איות לא-סטנדרטי) — תואם למדיניות הקיימת בקוד לשמור שמות טראקים כפי שהם. (4) סדר "אלבום ואז אמנים" יושם ב-`ep.title` (שדה תצוגה בלבד) — לא ב-`href`/`albumId`, ולא בטקסט שמוטמע בתוך פלייר ה-Bandcamp עצמו (מגיע מ-Bandcamp, לא בשליטתנו).
+- **Notes / Caveats:** ה-EP השני על הבנדקמפ של הלהקה עצמה (`atlabatla.bandcamp.com`) — שני סינגלים בודדים מ-9/2025 ("Lyrical Flow", "Once Upone A Time In The Negev") — לא EP מאוגד ולא רלוונטי כאן.
+- **Related:** [[draft-sandbox-environment]], [[project-skeleton-and-documentation]]
+
+### 2026-07-05 — תיקון-טיוטה לשגיאת hydration ב-MusicEmbeds [wip]
+- **What was done:** בזמן בניית הטיוטה למעלה נצפתה שגיאת hydration חוזרת (React) ב-`components/MusicEmbeds.tsx` בעמוד הבית האמיתי: `<a href={ep.href}>` בתוך `<iframe>` (fallback-children ישן) גורם ל-mismatch server/client, כי דפדפנים לא שומרים את ה-children של iframe באופן עקבי בזמן hydration. המשתמשת ביקשה לטפל. נוצר `app/draft/music-starlight-distortion/MusicEmbeds.draft.tsx` (מסומן `// @promote-to: components/MusicEmbeds.tsx`) — עותק זהה לקומפוננטה האמיתית, רק ש-`<iframe>` הפך ל-self-closing (הוסר ה-`<a>` הפנימי; הוא ממילא מיותר — יש קישור "Bandcamp" תקין מתחת לפלייר). עמוד הטיוטה עודכן לייבא מהעותק המקומי. אומת ב-Preview: אין שגיאות קונסולה אחרי reload, שלושת כותרות ה-EP עדיין נטענות נכון. `npm run promote:draft -- --dry-run music-starlight-distortion` מאשר שהקידום יעתיק בדיוק לקובץ הנכון (`components/MusicEmbeds.tsx`).
+- **Decisions:** לא קודם לקובץ האמיתי — גם תיקון-קוד עובר draft-first לפי `CLAUDE.md`, וממתין ל"לדחוף לורסל" מפורש, למרות שזה תיקון-נכונות (לא שינוי עיצובי) בלי סיכון ויזואלי.
+- **Notes / Caveats:** לא הצלחתי לשחזר את השגיאה שוב בבדיקה חוזרת בדף הבית (`/`) אחרי reload רגיל — יתכן שהיא תלוית first-paint אמיתי (SSR קר) ולא bhard-reload דרך client navigation. זה לא משנה את האבחנה: stack trace המקורי הצביע במפורש על `components/MusicEmbeds.tsx:27` (`<a href={ep.href}>` בתוך ה-iframe), וההסרה היא תיקון סטנדרטי-מוכר לדפוס הזה.
+- **Related:** [[music-eps-content-update]], [[draft-sandbox-environment]]

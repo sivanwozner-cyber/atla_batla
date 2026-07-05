@@ -1,10 +1,9 @@
+// PRD §4.3 — EPs ב-Bandcamp (Random Records). התוכן נטען מה-store (נערך ב-/admin/music).
+// שמות הטראקים נשמרים בדיוק כפי שהם, כולל שגיאות כתיב מכוונות — אסור "לתקן".
 import { Reveal } from "@/components/Reveal";
 import { FaBandcamp } from "react-icons/fa6";
 import type { SiteContent } from "@/lib/content";
 
-// PRD §4.3 — EPs ב-Bandcamp (Random Records). התוכן נטען מה-store (נערך ב-/admin/music).
-// שמות הטראקים נשמרים בדיוק כפי שהם, כולל שגיאות כתיב מכוונות — אסור "לתקן".
-// הוסר: פסקת ה-intro ("שני EPs ב-Bandcamp...") — טקסט placeholder לא רלוונטי.
 export function MusicEmbeds({ music }: { music: SiteContent["music"] }) {
   return (
     <section id="music" className="scroll-mt-14 px-6 py-20">
@@ -23,11 +22,7 @@ export function MusicEmbeds({ music }: { music: SiteContent["music"] }) {
                   src={`https://bandcamp.com/EmbeddedPlayer/album=${ep.albumId}/size=large/bgcol=181a1f/linkcol=e0a343/artwork=small/transparent=true/`}
                   seamless
                   loading="lazy"
-                >
-                  <a href={ep.href}>
-                    {ep.title} by Atla Batla
-                  </a>
-                </iframe>
+                />
                 <div className="mt-4 flex items-center justify-between">
                   <h3 className="font-display text-xl">{ep.title}</h3>
                   <a
