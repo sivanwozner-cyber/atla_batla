@@ -12,4 +12,4 @@
 - [[logo-metal-replacement]] — החלפת ה-wordmark ללוגו מטאל/אש שהמשתמשת סיפקה, אחרי הסרת-רקע-לבן (key סאטורציה + connected-components) — בטיוטה `app/draft/logo/`
 - [[vercel-deploy-health]] — מעקב בריאות דיפלוי; תיעד שרשרת ארוכה של deployments כושלים (build error ב-MovingObjects) שתוקנה ב-2026-07-04
 - [[about-video-embed]] — הטמעת סרטון YouTube (Shorts) כאייפריים בסקשן About + שדה ניהול חדש — קודם לפרודקשן ב-2026-07-04
-- [[music-eps-content-update]] — איתור EP חדש (Starlight Distortion, Zera Records) דרך Bright Data ותצוגת-טיוטה במקטע Music — ממתין לאישור קידום
+- [[music-eps-content-update]] — איתור EP חדש (Starlight Distortion, Zera Records) דרך Bright Data, תיקון hydration ב-MusicEmbeds, קודם לפרודקשן ב-2026-07-05

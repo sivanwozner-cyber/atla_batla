@@ -4,7 +4,7 @@
 תהליך לעדכון מקטע ה-Music (`data/site-content.json` → `music.eps`, נערך גם דרך `/admin/music`) כשיוצא שחרור חדש. איתור השחרור נעשה בפועל דרך scraping (Bright Data connector: `scrape_as_markdown`/`scrape_as_html`/`search_engine`) על Bandcamp/Facebook/Instagram — לא הייתה לינק ישיר מהמשתמשת. תוצאת ה-scrape מוזרקת לטיוטה (`app/draft/`) לפי מדיניות draft-first; קידום בפועל ל-`data/site-content.json` (ומשם לורסל) קורה רק בהוראה מפורשת.
 
 ## Open Questions
-- לא אושר עדיין קידום ל-production — שתי הטיוטות (EP חדש + תיקון hydration) מוצגות, ממתינות ל"לדחוף לורסל".
+- none
 
 ## Session Log
 
@@ -18,4 +18,10 @@
 - **What was done:** בזמן בניית הטיוטה למעלה נצפתה שגיאת hydration חוזרת (React) ב-`components/MusicEmbeds.tsx` בעמוד הבית האמיתי: `<a href={ep.href}>` בתוך `<iframe>` (fallback-children ישן) גורם ל-mismatch server/client, כי דפדפנים לא שומרים את ה-children של iframe באופן עקבי בזמן hydration. המשתמשת ביקשה לטפל. נוצר `app/draft/music-starlight-distortion/MusicEmbeds.draft.tsx` (מסומן `// @promote-to: components/MusicEmbeds.tsx`) — עותק זהה לקומפוננטה האמיתית, רק ש-`<iframe>` הפך ל-self-closing (הוסר ה-`<a>` הפנימי; הוא ממילא מיותר — יש קישור "Bandcamp" תקין מתחת לפלייר). עמוד הטיוטה עודכן לייבא מהעותק המקומי. אומת ב-Preview: אין שגיאות קונסולה אחרי reload, שלושת כותרות ה-EP עדיין נטענות נכון. `npm run promote:draft -- --dry-run music-starlight-distortion` מאשר שהקידום יעתיק בדיוק לקובץ הנכון (`components/MusicEmbeds.tsx`).
 - **Decisions:** לא קודם לקובץ האמיתי — גם תיקון-קוד עובר draft-first לפי `CLAUDE.md`, וממתין ל"לדחוף לורסל" מפורש, למרות שזה תיקון-נכונות (לא שינוי עיצובי) בלי סיכון ויזואלי.
 - **Notes / Caveats:** לא הצלחתי לשחזר את השגיאה שוב בבדיקה חוזרת בדף הבית (`/`) אחרי reload רגיל — יתכן שהיא תלוית first-paint אמיתי (SSR קר) ולא bhard-reload דרך client navigation. זה לא משנה את האבחנה: stack trace המקורי הצביע במפורש על `components/MusicEmbeds.tsx:27` (`<a href={ep.href}>` בתוך ה-iframe), וההסרה היא תיקון סטנדרטי-מוכר לדפוס הזה.
+- **Related:** [[music-eps-content-update]], [[draft-sandbox-environment]]
+
+### 2026-07-05 — קידום לפרודקשן: EP + תיקון hydration [shipped]
+- **What was done:** המשתמשת אישרה במפורש ("שמסיים תעלה לורסל"). קודם: (1) `npm run promote:draft -- music-starlight-distortion` העתיק את `MusicEmbeds.draft.tsx` המתוקן ל-`components/MusicEmbeds.tsx` — אבל דרס גם את הערת ה-PRD/מדיניות-שמות-טראקים המקורית בראש הקובץ בטעות; תוקן ידנית (שוחזרה ההערה המקורית, הוסרה הערת-הטיוטה). (2) הדלתא של ה-EP הוחלה ידנית ב-`data/site-content.json` (הוספת `starlight-distortion` ל-`music.eps`, ועדכון `music.intro` מ"שני EPs" ל"שלושה שחרורים" כדי לשקף את המספר החדש). אומת: `tsc --noEmit` נקי, ובעמוד הבית האמיתי (`/`) ב-Preview — 3 כרטיסי EP נטענים נכון, אין שגיאות קונסולה. נדחף ל-`main` (commit `d8adc6d`) → Vercel ידפלוי אוטומטית.
+- **Decisions:** קומיט/פוש נעשו ידנית ע"י Claude (לא הסתמכתי על "auto-commit חיצוני" שלא אותר כרץ בפועל בסשן הזה) — כדי לממש בפועל את "לדחוף לורסל" שהמשתמשת ביקשה. הצטרפו לקומיט רק הקבצים הרלוונטיים למשימה (EP + hydration fix + עדכוני vault); שינויים לא-קשורים שכבר היו ב-working tree לפני הסשן (`examples/` שנמחק/נוסף, `vault_atlabatla/.obsidian/*`) הושארו בחוץ במכוון.
+- **Notes / Caveats:** none.
 - **Related:** [[music-eps-content-update]], [[draft-sandbox-environment]]
